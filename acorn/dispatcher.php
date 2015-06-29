@@ -1,0 +1,112 @@
+<?php defined("ACORN_EXECUTE") or die("Access Denied.");
+
+include("acorn/config/database.php");
+
+include("acorn/config/general.php");
+
+include("acorn/global/functions.php");
+
+session_start();
+
+$GLOBALS["MYSQL_CON"] = new mysqli(constant("MySQL_Server"), constant("MySQL_User"), constant("MySQL_Pass"), constant("MySQL_DB"));
+// Check connection
+
+if ($GLOBALS["MYSQL_CON"]->connect_error) {
+    die("Failed to connect to MySQL");
+}
+
+
+$PathInfo = ParsePath();
+
+switch($PathInfo['call_parts'][0]) 
+{
+	case 'login': include 'acorn/pages/login.php'; break;
+	case 'logout': include 'acorn/pages/logout.php'; break;
+	
+	case 'account':
+	
+	Check_Auth_User();
+  	// Check to see if user is logged in
+  	// before dispatching pages
+	
+	include 'acorn/pages/account/edit.php';
+	
+	break;
+
+	default:
+  	case 'dashboard':
+  		
+  		Check_Auth_User();
+  		// Check to see if user is logged in
+  		// before dispatching pages
+  		
+  		switch($PathInfo['call_parts'][1])
+  		{
+  			case "":
+  				header("Location: " . constant("ROOT_URL") . "dashboard/bookings");
+  			break;
+  			case "bookings": 
+  			// begin case
+  				switch($PathInfo['call_parts'][2])
+  				{
+  				case "": include "acorn/pages/dashboard/bookings/view_all.php"; break;
+  				case "view": include "acorn/pages/dashboard/bookings/view.php"; break;
+  				case "delete": include "acorn/pages/dashboard/bookings/confirm_delete.php"; break;
+  				case "do_delete": include "acorn/pages/dashboard/bookings/do_delete.php"; break;
+  				default: include 'acorn/pages/errors/404.php';
+  				}
+  			break;
+  			// end case
+  		
+  			case "calendar": 
+  			// begin case
+  				switch($PathInfo['call_parts'][2])
+  				{
+  				case "": include "acorn/pages/dashboard/calendar/view_all.php"; break;
+  				case "view": include "acorn/pages/dashboard/calendar/view.php"; break;
+  				case "delete": include "acorn/pages/dashboard/calendar/confirm_delete.php"; break;
+  				case "do_delete": include "acorn/pages/dashboard/calendar/do_delete.php"; break;
+  				default: include 'acorn/pages/errors/404.php';
+  				}
+  			break;
+  			// end case
+  			
+  			case "clients": 
+  			// begin case
+  				switch($PathInfo['call_parts'][2])
+  				{
+  				case "": include "acorn/pages/dashboard/clients/view_all.php"; break;
+  				case "view": include "acorn/pages/dashboard/clients/view.php"; break;
+  				case "vcard": include "acorn/pages/dashboard/clients/export_vcard.php"; break;
+  				case "delete": include "acorn/pages/dashboard/clients/confirm_delete.php"; break;
+  				case "do_delete": include "acorn/pages/dashboard/clients/do_delete.php"; break;
+  				default: include 'acorn/pages/errors/404.php';
+  				}
+  			break;
+  			// end case
+  			
+  			case "services": 
+  			// begin case
+  				switch($PathInfo['call_parts'][2])
+  				{
+  				case "": include "acorn/pages/dashboard/services/view_all.php"; break;
+  				case "view": include "acorn/pages/dashboard/services/view.php"; break;
+  				case "edit": include "acorn/pages/dashboard/services/edit.php"; break;
+  				case "add": include "acorn/pages/dashboard/services/add.php"; break;
+  				case "delete": include "acorn/pages/dashboard/services/confirm_delete.php"; break;
+  				case "do_delete": include "acorn/pages/dashboard/services/do_delete.php"; break;
+  				default: include 'acorn/pages/errors/404.php';
+  				}
+  			break;
+  			// end case
+  			
+  			
+  			default: include 'acorn/pages/errors/404.php';
+  		
+  		}
+  		
+	break;
+    
+  case 'admin': include 'users.php';
+    break;
+}
