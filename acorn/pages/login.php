@@ -28,11 +28,34 @@ if(isset($_POST["email"]) || isset($_POST["password"]))
 	$Email = strtolower($_POST["email"]);
 	$Password = hash_password($_POST["password"], $Email);
 	
-	$Query = "SELECT Email, Password FROM Users WHERE Email='$Email' AND Password='$Password'";
+	$Query = "SELECT UserID, Name, Email, Password FROM Users WHERE Email='$Email' AND Password='$Password'";
 	$Result = $GLOBALS["MYSQL_CON"]->query($Query);
+
 	if($Result->num_rows == 1)
 	{
+		$UserRow = $Result->fetch_assoc();
+		// asign rows to array
+	
 		$_SESSION["ACORN_LOGIN"] = true;
+		$_SESSION["ACORN_USER_NAME"] = $UserRow["Name"];
+		
+		if($_POST["remember-me"] == true)
+		{
+			$Token = md5(uniqid(rand(), true));
+			$IP = $_SERVER['REMOTE_ADDR'];
+			$UserAgent = $_SERVER["HTTP_USER_AGENT"];
+			$Timestamp = date("Y-m-d H:i:s");
+			$UserID = $UserRow["UserID"];
+			
+			setcookie("AUTH_TOKEN", $Token, time() + (3600 * 24 * 7 * 4));
+			// set cookie for 1 month?
+			
+			$stmt = $GLOBALS["MYSQL_CON"]->prepare("INSERT INTO UserSessions VALUES (DEFAULT,?,?,?,?,?)");
+			$stmt->bind_param("sssss", $UserID, $Token, $UserAgent, $IP, $Timestamp);
+			$stmt->execute();
+			$stmt->close();
+			// insert into database.
+		}
 		
 			header("Location: "  . constant("BASE_URL") . "dashboard");
 			exit;
@@ -59,8 +82,9 @@ if(isset($_POST["email"]) || isset($_POST["password"]))
   	
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="author" content="Will Hollands">
+    <link rel="apple-touch-icon" href="<?php echo constant("ROOT_URL"); ?>acorn/images/Acorn_App_Icon.png">
     <link rel="icon" href="../../favicon.ico">
 
     <title>Sign In :: Acorn</title>
@@ -129,14 +153,14 @@ body {
     <div class="container">
 
       <form method="post" action="<?php echo constant("BASE_URL"); ?>login" class="form-signin">
-        <h2 class="form-signin-heading">Please Sign In</h2>
+        <h2 class="form-signin-heading text-center"><span style="color:#6E8F26;font-weight:bold;">Acorn</span> Sign-In</h2>
         <label for="email" class="sr-only">Email address</label>
         <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
         <label for="password" class="sr-only">Password</label>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me for 30 days
+            <input type="checkbox" name="remember-me" value="true" checked> Remember me for 30 days
           </label>
         </div>
         <button class="btn btn-lg btn-success btn-block" type="submit">Sign In</button>

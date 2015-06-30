@@ -10,7 +10,7 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 
 <div class="container">
 
-<h1>Bookings</h1>
+<h1><i class="fa fa-book"></i> Bookings</h1>
 
 <?php
 		
@@ -21,7 +21,6 @@ if($Result->num_rows >= 1)
 
 <thead>
 	<tr>
-		<td>#</td>
 		<td>Client</td>
 		<td>Date</td>
 		<td>Actions</td>
@@ -32,7 +31,6 @@ if($Result->num_rows >= 1)
 	while($row = $Result->fetch_assoc())
 	{
 	echo "<tr>";
-	echo "<td>" . $row["ApptID"] . "</td>";
 	
 	echo "<td>";
 		$Query_2 = "SELECT ClientID, Name FROM Clients WHERE ClientID='".$row["ClientID"]."'";

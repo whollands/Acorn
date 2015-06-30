@@ -30,11 +30,22 @@ if($Result->num_rows >= 1)
 
 <img src="http://gravatar.com/avatar/<?php echo md5($row["Email"]); ?>"/>
 
-	<h4>Email:</h4>
-	<a href="mailto:<?php echo $row["Email"]; ?>"><?php echo $row["Email"]; ?></a>
-
-	<h4>Phone:</h4>
-	<a href="tel:<?php echo $row["Phone"]; ?>"><?php echo $row["Phone"]; ?></a>
+<table class="table table-striped">
+<tbody>
+<tr>
+	<td>Email Address</td>
+	<td><i class="fa fa-envelope-o"></i> <a href="mailto:<?php echo $row["Email"]; ?>"><?php echo $row["Email"]; ?></a></td>
+</tr>
+<tr>
+	<td>Telephone</td>
+	<?php
+	$ClientPhone = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $row["Phone"]);
+	?>
+	<td><i class="fa fa-phone"></i> <a href="tel:<?php echo $ClientPhone; ?>"><?php echo $ClientPhone ; ?></a></td>
+</tr>
+</tbody>
+</table>
+	
 
 	<h4>Identification Key:</h4>
 	<p><?php echo $row["Key"]; ?></p>

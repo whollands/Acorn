@@ -10,11 +10,11 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 
 <div class="container">
 
-<div class="col-md-10">
-<h1>Calendar</h1>
+<div class="col-md-11">
+<h1><i class="fa fa-calendar"></i> Calendar</h1>
 </div>
 
-<div class="col-md-2">
+<div class="col-md-1">
 <a href="new-date.php" class="btn btn-success btn-md" style="text-align:right;"><i class="fa fa-plus"></i> New Date</a>
 </div>
 
@@ -27,7 +27,6 @@ if($Result->num_rows >= 1)
 
 <thead>
 	<tr>
-		<td>#</td>
 		<td>Date & Time</td>
 		<td>Bookings Made</td>
 		<td>Actions</td>
@@ -39,7 +38,6 @@ if($Result->num_rows >= 1)
 	{
 		
 	echo "<tr>";
-	echo "<td>" . $row["DateID"] . "</td>";
 	echo "<td>" . date('jS F Y', strtotime($row["DateTime"])) . "</td>";
 	echo "<td>";
 			$Query_2 = "SELECT ClientID FROM Appointments WHERE DateID='".$row["DateID"]."'";

@@ -3,8 +3,10 @@
 include("acorn/global/admin-html-header.php");
 // include html header
 
+$SearchTerm = $PathInfo['query_vars']['search_term'];
 
-$Query = "SELECT ClientID, Name FROM Clients ORDER BY ClientID";
+
+$Query = "SELECT ClientID, Name FROM Clients WHERE Name LIKE '%$SearchTerm%'";
 $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 	
 ?>
@@ -12,11 +14,11 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 <div class="container">
 
 <div class="col-md-11">
-	<h1><i class="fa fa-users"></i> Clients</h1>
+	<h1>Search for "<?php echo htmlspecialchars($SearchTerm); ?>"</h1>
 </div>
 
 <div class="col-md-1">
-	<a href="<?php echo constant("BASE_URL"); ?>dashboard/clients/add" class="btn btn-success btn-md" style="text-align:right;"><i class="fa fa-plus"></i> New Client</a>
+	<a href="<?php echo constant("BASE_URL"); ?>dashboard/clients" class="btn btn-danger btn-md" style="text-align:right;"><i class="fa fa-times"></i> Clear Search</a>
 </div>
 
 <?php
@@ -24,21 +26,11 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 if($Result->num_rows >= 1)
 {
 ?>
-
-<div class="row">
- <div class="col-lg-6">
-    <div class="input-group">
-    <form action="<?php echo constant("BASE_URL"); ?>dashboard/clients/search" method="get">
-      <input type="search" name="search_term" class="form-control" placeholder="Search for clients...">
-    </form>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div>
-  
 <table class="table table-hover">
 
 <thead>
 	<tr>
+		<td>#</td>
 		<td>Name</td>
 		<td>Bookings Made</td>
 		<td>Actions</td>
@@ -49,6 +41,7 @@ if($Result->num_rows >= 1)
 	while($row = $Result->fetch_assoc())
 	{
 	echo "<tr>";
+	echo "<td>" . $row["ClientID"] . "</td>";
 	echo "<td>" . $row["Name"] . "</td>";
 	echo "<td>";
 		$Query_2 = "SELECT ClientID FROM Appointments WHERE ClientID='".$row["ClientID"]."'";
@@ -72,7 +65,7 @@ if($Result->num_rows >= 1)
 }
 else
 {
-	echo "No clients yet.";
+	echo "<p>No results found</p>";
 }
 ?>
 

@@ -8,7 +8,7 @@ $CurrentPage = basename($_SERVER["SCRIPT_NAME"], '');
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
@@ -43,7 +43,7 @@ $CurrentPage = basename($_SERVER["SCRIPT_NAME"], '');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><img src="<?php echo constant("ROOT_URL"); ?>acorn/images/Acorn_Icon.png"/></a>
+      <a class="navbar-brand" target="_blank" href="https://github.com/whollands/Acorn-Appointments/" style="color:#6E8F26;font-weight:bold;">Acorn</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,12 +60,14 @@ $CurrentPage = basename($_SERVER["SCRIPT_NAME"], '');
       	<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-server"></i>&nbsp;Admin <span class="caret"></span></a>
           <ul class="dropdown-menu">
-          	<li><a href="<?php echo constant("BASE_URL"); ?>admin/users"><i class="fa fa-key"></i> Users</a></li>
-            <li><a href="<?php echo constant("BASE_URL"); ?>admin/settings"><i class="fa fa-gears"></i> System Settings</a></li>
+          	<li><a href="<?php echo constant("BASE_URL"); ?>system/users"><i class="fa fa-users"></i> Users</a></li>
+          	<li><a href="<?php echo constant("BASE_URL"); ?>system/backup"><i class="fa fa-hdd-o"></i> Backup & Restore</a></li>
+          	<li><a href="<?php echo constant("BASE_URL"); ?>system/email"><i class="fa fa-envelope-o"></i> Email Customisation</a></li>
+            <li><a href="<?php echo constant("BASE_URL"); ?>system/settings"><i class="fa fa-gears"></i> System Settings</a></li>
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>&nbsp;Will Hollands <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>&nbsp;<?php echo $_SESSION["ACORN_USER_NAME"]; ?> <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo constant("BASE_URL"); ?>account"><i class="fa fa-pencil"></i> Edit account</a></li>
             <li><a href="https://github.com/whollands/Acorn-Appointments/wiki" target="_blank"><i class="fa fa-question-circle"></i> Support</a></li>

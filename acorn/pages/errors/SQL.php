@@ -1,7 +1,5 @@
 <?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
-header("HTTP/1.0 404 Not Found");
-
 include("acorn/global/admin-html-header.php");
 
 ?>

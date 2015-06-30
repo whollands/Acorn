@@ -11,13 +11,12 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 
 <div class="container">
 
-<h1>Services</h1>
+<h1><i class="fa fa-tags"></i> Services</h1>
 
 <table class="table table-hover">
 
 <thead>
 	<tr>
-		<td>#</td>
 		<td>Name</td>
 		<td>Max Bookings</td>
 		<td>Actions</td>
@@ -31,7 +30,6 @@ if($Result->num_rows >= 1)
 	while($row = $Result->fetch_assoc())
 	{
 	echo "<tr>";
-	echo "<td>" . $row["ServiceID"] . "</td>";
 	echo "<td>" . $row["Name"] . "</td>";
 	echo "<td>" . $row["MaxBooking"] . "</td>";
 	echo "<td>";

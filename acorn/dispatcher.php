@@ -77,6 +77,8 @@ switch($PathInfo['call_parts'][0])
   				{
   				case "": include "acorn/pages/dashboard/clients/view_all.php"; break;
   				case "view": include "acorn/pages/dashboard/clients/view.php"; break;
+  				case "add": include "acorn/pages/dashboard/clients/add.php"; break;
+  				case "search": include "acorn/pages/dashboard/clients/search.php"; break;
   				case "vcard": include "acorn/pages/dashboard/clients/export_vcard.php"; break;
   				case "delete": include "acorn/pages/dashboard/clients/confirm_delete.php"; break;
   				case "do_delete": include "acorn/pages/dashboard/clients/do_delete.php"; break;
