@@ -23,9 +23,12 @@ $ServiceName = $row["Name"];
 $ServiceDescription = $row["Description"];
 $ServiceMax = $row["MaxBooking"];
 $ServiceEnabled = $row["Enabled"];
+$ServiceCost = $row["Cost"];
 
 if(isset($_POST["SUBMITTED_FORM"]))
 {
+
+$Completed = 0;
 
 	switch($_POST["ServiceEnabled"])
 	{
@@ -47,7 +50,7 @@ if(isset($_POST["SUBMITTED_FORM"]))
 			}
 			else 
 			{ 
-			$ServiceNameDone = 1;
+			$Completed = $Completed + 1;
 			}
 		}
 		// end name validation
@@ -61,7 +64,20 @@ if(isset($_POST["SUBMITTED_FORM"]))
 			}
 			else 
 			{ 
-			$ServiceMaxDone = 1;
+			$Completed = $Completed + 1;
+			}
+		// end name validation
+		
+		
+		$ServiceCost = CleanData($_POST["ServiceCost"]);
+			
+		if(!preg_match("/^[0-9.]*$/",$ServiceCost))
+			{
+				$ServiceCostErr = "Invalid cost, numbers and decimal point only";
+			}
+			else 
+			{ 
+			$Completed = $Completed + 1;
 			}
 		// end name validation
 
@@ -73,14 +89,14 @@ if(isset($_POST["SUBMITTED_FORM"]))
 	else
 	{
 		$ServiceDescription = strip_tags(CleanData($_POST["ServiceDescription"]));
-		$ServiceDescriptionDone = 1;
+		$Completed = $Completed + 1;
 	}
 	
-if($ServiceDescriptionDone == 1 && $ServiceMaxDone == 1 && $ServiceNameDone == 1)
+if($Completed == 4)
 {
 
-		$stmt = $GLOBALS["MYSQL_CON"]->prepare("UPDATE Services SET Name=?, MaxBooking=?, Description=?, Enabled=? WHERE ServiceID=?");
-		$stmt->bind_param("sssss", $ServiceName, $ServiceMax, $ServiceDescription, $ServiceEnabled, $ServiceID);
+		$stmt = $GLOBALS["MYSQL_CON"]->prepare("UPDATE Services SET Name=?, MaxBooking=?, Cost=?, Description=?, Enabled=? WHERE ServiceID=?");
+		$stmt->bind_param("ssssss", $ServiceName, $ServiceMax, $ServiceCost, $ServiceDescription, $ServiceEnabled, $ServiceID);
 		$stmt->execute();
 		$stmt->close();
 		
@@ -115,12 +131,25 @@ else
   </div>
 </div>
 
-<!-- Text input-->
+<!-- Number input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="name">Maximum number of bookings:</label>  
   <div class="col-md-5">
-  <input name="ServiceMax" type="text" value="<?php echo $ServiceMax; ?>" class="form-control input-md">
+  <input name="ServiceMax" type="number" value="<?php echo $ServiceMax; ?>" class="form-control input-md">
   <span class="help-block" style="color:red;"><?php echo $ServiceMaxErr; ?></span>  
+  </div>
+</div>
+
+
+<!-- Number input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="name">Cost Per Booking:</label>  
+  <div class="col-md-5">
+ 	<div class="input-group">
+      <div class="input-group-addon"><?php echo constant("CURRENCY_SYMBOL"); ?></div>
+      <input type="number" class="form-control" name="ServiceCost" value="<?php echo $ServiceCost; ?>" placeholder="0.00">
+	</div>
+	<span class="help-block" style="color:red;"><?php echo $ServiceCostErr; ?></span> 
   </div>
 </div>
 

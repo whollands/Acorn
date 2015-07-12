@@ -5,6 +5,9 @@ function Check_Auth_User()
 {
 	if($_SESSION["ACORN_LOGIN"] != true)
 	{
+		$PathInfo = ParsePath();
+		$_SESSION["ACORN_AUTH_RETURN"] = $_SERVER['REQUEST_URI'];
+		
 		header("Location: " . constant("BASE_URL") . "login");
 		exit;
 	}

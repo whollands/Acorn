@@ -100,15 +100,27 @@ else
   </div>
 </div>
 
-<!-- Text input-->
+<!-- Number input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="name">Maximum number of bookings:</label>  
   <div class="col-md-5">
-  <input name="ServiceMax" type="text" value="<?php echo $ServiceMax; ?>" class="form-control input-md">
+  <input name="ServiceMax" type="number" value="<?php echo $ServiceMax; ?>" class="form-control input-md">
   <span class="help-block" style="color:red;"><?php echo $ServiceMaxErr; ?></span>  
   </div>
 </div>
 
+<!-- Number input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="name">Cost Per Booking:</label>  
+  <div class="col-md-5">
+ 	<div class="input-group">
+      <div class="input-group-addon"><?php echo constant("CURRENCY_SYMBOL"); ?></div>
+      <input type="number" class="form-control" id="exampleInputAmount" placeholder="5.00">
+	</div>
+  </div>
+</div>
+
+  
 <!-- Textarea -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="textarea">Description:</label>
@@ -141,16 +153,6 @@ else
 
 </fieldset>
 </form>
-
-
-<?php
-	
-}
-else
-{
-	echo "This service does not exist.";
-}
-?>
 
 
 </div>
