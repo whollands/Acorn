@@ -109,6 +109,46 @@ switch($PathInfo['call_parts'][0])
   		
 	break;
     
-  case 'admin': include 'users.php';
-    break;
+  case 'system':
+  
+  		Check_Auth_User();
+  		// Check to see if user is logged in
+  		// before dispatching pages
+  		
+  		switch($PathInfo['call_parts'][1])
+  		{
+  
+  		case "users": 
+  		// begin case
+  			switch($PathInfo['call_parts'][2])
+  			{
+  			case "": include "acorn/pages/system/users/view_all.php"; break;
+  			case "view": include "acorn/pages/system/users/view.php"; break;
+  			case "add": include "acorn/pages/system/users/add.php"; break;
+  			case "search": include "acorn/pages/system/users/search.php"; break;
+  			case "delete": include "acorn/pages/system/users/confirm_delete.php"; break;
+  			case "do_delete": include "acorn/pages/system/users/do_delete.php"; break;
+  			default: include 'acorn/pages/errors/404.php';
+  			}
+  		break;
+  		// end case
+  		
+  		case "backup": 
+  		// begin case
+  			switch($PathInfo['call_parts'][2])
+  			{
+  			case "": include "acorn/pages/system/backup/backup.php"; break;
+  			case "do_backup": include "acorn/pages/system/backup/do_backup.php"; break;
+  			case "do_restore": include "acorn/pages/system/backup/do_restore.php"; break;
+  			default: include 'acorn/pages/errors/404.php';
+  			}
+  		break;
+  		// end case
+  		
+  		default: include 'acorn/pages/errors/404.php';
+  		}
+  
+  break;
+  
+  default: include 'acorn/pages/errors/404.php';
 }
