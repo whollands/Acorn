@@ -14,7 +14,7 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 
 <?php
 		
-if($Result->num_rows >= 1)
+if($Result->num_rows == 1)
 {
 
 $row = $Result->fetch_assoc();

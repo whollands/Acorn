@@ -1,5 +1,20 @@
 <?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
+$UserID = $_SESSION["ACORN_USER_ID"];
+
+$Query = "SELECT * FROM Users WHERE UserID='$UserID'";
+$Result = $GLOBALS["MYSQL_CON"]->query($Query);
+
+if($Result->num_rows != 1) die("Error: None or multiple results were found");
+
+$row = $Result->fetch_assoc();
+
+$UserFullName = $row["Name"];
+$UserEmail = $row["Email"];
+$UserNotify = $row["Notify"];
+$UserID = $row["UserID"];
+
+
 include("acorn/global/admin-html-header.php");
 // include html header
 ?>
@@ -15,13 +30,20 @@ include("acorn/global/admin-html-header.php");
 
 <fieldset>
    
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="UserID">User ID:</label>  
+  <div class="col-md-5">
+  <input name="UserID" type="number" value="<?php echo $UserID; ?>" class="form-control input-md" disabled> 
+  </div>
+</div>
 
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="FullName">Full Name:</label>  
   <div class="col-md-5">
-  <input name="FullName" type="text" value="<?php echo $FullName; ?>" class="form-control input-md">
-  <span class="help-block" style="color:red;"><?php echo $FullNameErr; ?></span>  
+  <input name="FullName" type="text" value="<?php echo $UserFullName; ?>" class="form-control input-md">
+  <span class="help-block" style="color:red;"><?php echo $UserFullNameErr; ?></span>  
   </div>
 </div>
 
@@ -29,8 +51,8 @@ include("acorn/global/admin-html-header.php");
 <div class="form-group">
   <label class="col-md-4 control-label" for="Email">Email Address:</label>  
   <div class="col-md-5">
-  <input name="Email" type="Email" value="<?php echo $Email; ?>" class="form-control input-md">
-  <span class="help-block" style="color:red;"><?php echo $EmailErr; ?></span>  
+  <input name="Email" type="Email" value="<?php echo $UserEmail; ?>" class="form-control input-md">
+  <span class="help-block" style="color:red;"><?php echo $UserEmailErr; ?></span>  
   </div>
 </div>
 
@@ -39,8 +61,8 @@ include("acorn/global/admin-html-header.php");
   <label class="col-md-4 control-label" for=""></label>
   <div class="col-md-4">
     <label class="checkbox-inline" for="BookingNotification">
-      <input type="checkbox" name="BookingNotification" value="1"<?php if($ServiceEnabled == 1) { echo " checked"; } ?>>
-      Send me a notification when a new booking is made
+      <input type="checkbox" name="BookingNotification" value="1"<?php if($UserNotify == 1) { echo " checked"; } ?>>
+      Send me an email notifications for bookings
     </label>
   </div>
 </div>

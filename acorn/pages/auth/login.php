@@ -46,6 +46,7 @@ $Email = $_POST["Email"];
                 	
                 	$_SESSION["ACORN_LOGIN"] = true;
 					$_SESSION["ACORN_USER_NAME"] = $Name;
+					$_SESSION["ACORN_USER_ID"] = CleanID($UserID);
                 	
                 	/*
                     // Password is correct!
@@ -70,7 +71,7 @@ $Email = $_POST["Email"];
 					}
 					else
 					{
-					header("Location: " . constant("BASE_URL") . $_SESSION["ACORN_AUTH_RETURN"]);
+					header("Location: " . $_SESSION["ACORN_AUTH_RETURN"]);
 					exit;
 					}
 				
@@ -191,7 +192,7 @@ body {
         <button class="btn btn-lg btn-success btn-block" type="submit">Sign In</button>
       </form>
 <p style="text-align:center;">You will be returned to <?php
- echo constant("BASE_URL") . $_SESSION["ACORN_AUTH_RETURN"];
+ echo $_SESSION["ACORN_AUTH_RETURN"];
  ?></p>
  
  <?php

@@ -20,8 +20,8 @@ $PathInfo = ParsePath();
 
 switch($PathInfo['call_parts'][0]) 
 {
-	case 'login': include 'acorn/pages/login.php'; break;
-	case 'logout': include 'acorn/pages/logout.php'; break;
+	case 'login': include 'acorn/pages/auth/login.php'; break;
+	case 'logout': include 'acorn/pages/auth/logout.php'; break;
 	
 	case 'account':
 	
@@ -29,8 +29,20 @@ switch($PathInfo['call_parts'][0])
   	// Check to see if user is logged in
   	// before dispatching pages
 	
-	include 'acorn/pages/account/edit.php';
-	
+	switch($PathInfo['call_parts'][1])
+  	{
+  		case "":
+			include 'acorn/pages/account/overview.php';
+		break;
+		
+		case "password":
+			include 'acorn/pages/account/password.php';
+		break;
+		
+		case "edit":
+			include 'acorn/pages/account/edit.php';
+		break;
+	}
 	break;
 
 	default:
@@ -145,9 +157,17 @@ switch($PathInfo['call_parts'][0])
   		break;
   		// end case
   		
+  		case "email":
+  			include "acorn/pages/system/email/email.php";
+  		break;
+  		
   		default: include 'acorn/pages/errors/404.php';
   		}
   
+  break;
+  
+  case "book":
+  	include "acorn/pages/book/book.php";
   break;
   
   default: include 'acorn/pages/errors/404.php';

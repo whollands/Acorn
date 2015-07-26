@@ -57,7 +57,9 @@ if($AllClear == 4)
 {
 
 $Key = RandomKey(8);
-$Query = "INSERT INTO Clients VALUES (DEFAULT, '$Name', '$Email', '$Phone', '$Notes', '$Key')";
+$EmailMD5 = md5($Email);
+
+$Query = "INSERT INTO Clients VALUES (DEFAULT, '$Name', '$Email', '$EmailMD5', '$Phone', '$Notes', '$Key')";
 
 if (mysqli_query($GLOBALS["MYSQL_CON"], $Query)) {
    header("Location: " . constant("BASE_URL") . "dashboard/clients/add/success");
