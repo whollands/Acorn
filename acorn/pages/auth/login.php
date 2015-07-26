@@ -191,10 +191,18 @@ body {
         </div>
         <button class="btn btn-lg btn-success btn-block" type="submit">Sign In</button>
       </form>
-<p style="text-align:center;">You will be returned to <?php
- echo $_SESSION["ACORN_AUTH_RETURN"];
+      
+<?php
+
+$LoginReturn = $_SESSION["ACORN_AUTH_RETURN"];
+
+if($LoginReturn != null)
+{
+?><p style="text-align:center;">You will be returned to <?php
+ echo $LoginReturn;
  ?></p>
- 
+ <?php }
+ ?>
  <?php
 if($_SESSION["ACORN_AUTH_ERROR"] == true)
 {
