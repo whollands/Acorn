@@ -36,6 +36,7 @@ include("acorn/global/admin-html-header.php");
   <a href="<?php echo constant("BASE_URL"); ?>account/edit" class="list-group-item"><i class="fa fa-pencil"></i> Edit account</a>
   <a href="<?php echo constant("BASE_URL"); ?>account/password" class="list-group-item"><i class="fa fa-lock"></i> Change password</a>
   <a href="http://gravatar.com/" class="list-group-item"><i class="fa fa-picture-o"></i> Change profile picture</a>
+  <a href="<?php echo constant("BASE_URL"); ?>logout" class="list-group-item"><i class="fa fa-sign-out"></i> Sign Out</a>
 </div>
 
 </div>

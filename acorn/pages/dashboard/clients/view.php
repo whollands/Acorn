@@ -24,12 +24,17 @@ function goBack() {
 if($Result->num_rows >= 1)
 {
 	$row = $Result->fetch_assoc();
-	echo "<h2>" . $row["Name"] . "</h2>";
 	
 ?>
 
-<img src="http://gravatar.com/avatar/<?php echo md5($row["Email"]); ?>"/>
+<p>&nbsp;</p>
 
+<div class="col-md-4"></div>
+
+<div class="row col-md-4 text-center">
+	<img class="img-rounded" src="http://gravatar.com/avatar/<?php echo md5($row["Email"]); ?>?s=100&d=mm"/>
+	<h2><?php echo $row["Name"]; ?></h2>
+<p>&nbsp;</p>
 <table class="table table-striped">
 <tbody>
 <tr>
@@ -43,20 +48,26 @@ if($Result->num_rows >= 1)
 	?>
 	<td><i class="fa fa-phone"></i> <a href="tel:<?php echo $ClientPhone; ?>"><?php echo $ClientPhone ; ?></a></td>
 </tr>
+<tr>
+	<td>Key</td>
+	<td><i class="fa fa-key"></i> <?php echo $row["Key"]; ?></td>
+</tr>
+<tr>
+	<td>Notes</td>
+	<td><i class="fa fa-book"></i> <?php echo $row["Notes"]; ?></td>
+</tr>
 </tbody>
 </table>
 	
-
-	<h4>Identification Key:</h4>
-	<p><?php echo $row["Key"]; ?></p>
-	
-	<h4>Notes:</h4>
-	<p><?php echo $row["Notes"]; ?></p>
-	
 	<br>
 	
-	<a href="<?php echo constant("BASE_URL"); ?>dashboard/clients/vcard/<?php echo $ClientID; ?>" target="_blank" class="btn btn-warning"><i class="fa fa-download"></i> Import to contacts</a>
+	<a href="<?php echo constant("BASE_URL"); ?>dashboard/clients/vcard/<?php echo $ClientID; ?>" target="_blank" class="btn btn-sm btn-default"><i class="fa fa-download"></i> Import to contacts</a>&nbsp;
+	<a href="<?php echo constant("BASE_URL"); ?>dashboard/clients/edit/<?php echo $ClientID; ?>" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</a>&nbsp;
+	<a href="<?php echo constant("BASE_URL"); ?>dashboard/clients/delete/<?php echo $ClientID; ?>" class="btn btn-sm btn-danger"><i class="fa fa-times"></i> Delete</a>&nbsp;
 	
+	
+</div><!-- /. row col-md-4 -->
+<div class="col-md-4"></div>
 <?php
 
 
@@ -91,7 +102,7 @@ else
 }
 else
 {
-	echo "This client does not exist.";
+	echo "<div class=\"alert alert-warning\" role=\"alert\"><i class=\"fa fa-warning\"></i>&nbsp; This client does not exist</div>";
 }
 ?>
 
