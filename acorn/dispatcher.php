@@ -76,6 +76,7 @@ switch($PathInfo['call_parts'][0])
   				{
   				case "": include "acorn/pages/dashboard/calendar/view_all.php"; break;
   				case "view": include "acorn/pages/dashboard/calendar/view.php"; break;
+  				case "add": include "acorn/pages/dashboard/calendar/add.php"; break;
   				case "delete": include "acorn/pages/dashboard/calendar/confirm_delete.php"; break;
   				case "do_delete": include "acorn/pages/dashboard/calendar/do_delete.php"; break;
   				default: include 'acorn/pages/errors/404.php';

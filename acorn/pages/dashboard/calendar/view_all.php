@@ -15,7 +15,7 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 </div>
 
 <div class="col-md-1">
-<a href="new-date.php" class="btn btn-success btn-md" style="text-align:right;"><i class="fa fa-plus"></i> New Date</a>
+<a href="<?php echo constant("BASE_URL"); ?>dashboard/calendar/add" class="btn btn-success btn-md" style="text-align:right;"><i class="fa fa-plus"></i> New Date</a>
 </div>
 
 <?php

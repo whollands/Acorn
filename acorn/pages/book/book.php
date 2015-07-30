@@ -15,12 +15,37 @@ $EmailHash = md5($_POST["Email"]);
 header("Location: " . constant("BASE_URL") . "book/" . $ServiceID . "/" . $DateID . "/" . $EmailHash . "/");
 exit; 
 }
-
-
-include("acorn/global/admin-html-header.php");
-// include html header
 	
-?>
+?><!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="<?php echo constant("ROOT_URL"); ?>acorn/images/Acorn_Logo_Icon.png">
+    <link rel="apple-touch-icon" href="<?php echo constant("ROOT_URL"); ?>acorn/images/Acorn_App_Icon.png">
+
+    <title>New Booking</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo constant("ROOT_URL"); ?>acorn/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="http://cdn.hollands123.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+
+  <body>
+
 <div class="container">
 
 <h1><i class="fa fa-plus"></i> New Booking</h1>
@@ -88,7 +113,7 @@ else if($ServiceID != null && $DateID == null)
 
 ?>
 <ol class="breadcrumb">
-  <li><a href="<?php echo constant("BASE_URL"); ?>book/<?php echo $ServiceID; ?>"><i class="fa fa-tags"></i> 11+ Mock</a></li>
+  <li><a href="<?php echo constant("BASE_URL"); ?>book/"><i class="fa fa-tags"></i> 1. Select service</a></li>
   <li class="active"><i class="fa fa-calendar"></i> Select a date</li>
 </ol>
 
@@ -173,6 +198,12 @@ function isValidMd5($md5 ='')
 		?>
 
     <div class="row">
+    <ol class="breadcrumb">
+  <li><a href="<?php echo constant("BASE_URL"); ?>book/"><i class="fa fa-tags"></i> 1. Select Service</a></li>
+  <li><a href="<?php echo constant("BASE_URL"); ?>book/<?php echo $ServiceID; ?>/"><i class="fa fa-calendar"></i> 2. Select Date</a></li>
+  <li><a href="<?php echo constant("BASE_URL"); ?>book/<?php echo $ServiceID; ?>/<?php echo $DateID; ?>/<?php echo $Email; ?>/"><i class="fa fa-calendar"></i> 3. Select Date</a></li>
+  <li class="selected"><i class="fa fa-envelope-o"></i> 4. Enter details</li>
+</ol>
         <div class="col-md-4"></div>
         <div class="col-md-4">
         
@@ -180,17 +211,17 @@ function isValidMd5($md5 ='')
         
         	<div class="form-group">
     			<label for="name">Full Name</label>
-    			<input type="email" class="form-control" name="name" placeholder="John Doe">
+    			<input type="email" class="form-control" name="name" placeholder="John Doe" required>
   			</div>
   			
         	<div class="form-group">
     			<label for="email">Email address</label>
-    			<input type="email" class="form-control" name="email" placeholder="someone@example.com">
+    			<input type="email" class="form-control" name="email" placeholder="someone@example.com" required>
   			</div>
   			
   			<div class="form-group">
     			<label for="phone">Phone number</label>
-    			<input type="phone" class="form-control" name="phone" placeholder="+44 1234 567 890">
+    			<input type="phone" class="form-control" name="phone" placeholder="+44 1234 567 890" required>
   			</div>
         
         	<div class="form-group">
@@ -220,8 +251,8 @@ function isValidMd5($md5 ='')
 
 
 <ol class="breadcrumb">
-  <li><a href="<?php echo constant("BASE_URL"); ?>book/<?php echo $ServiceID; ?>/"><i class="fa fa-tags"></i> 11+ Mock</a></li>
-  <li><a href="<?php echo constant("BASE_URL"); ?>book/<?php echo $ServiceID; ?>/<?php echo $DateID; ?>/"><i class="fa fa-calendar"></i> 11th June</a></li>
+  <li><a href="<?php echo constant("BASE_URL"); ?>book/"><i class="fa fa-tags"></i> 1. Select Service</a></li>
+  <li><a href="<?php echo constant("BASE_URL"); ?>book/<?php echo $ServiceID; ?>/"><i class="fa fa-calendar"></i> 2. Select Date</a></li>
   <li class="selected"><i class="fa fa-envelope-o"></i> Enter email address</li>
 </ol>
 
@@ -250,5 +281,13 @@ function isValidMd5($md5 ='')
 }
 // end switchies!
 
-include("acorn/global/admin-html-footer.php");
-// include html header
+?>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="<?php echo constant("ROOT_URL"); ?>acorn/bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="<?php echo constant("ROOT_URL"); ?>acorn/bootstrap/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
