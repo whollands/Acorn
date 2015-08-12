@@ -42,6 +42,21 @@ switch($PathInfo['call_parts'][0])
 		case "edit":
 			include 'acorn/pages/account/edit.php';
 		break;
+		
+		case "two_factor":
+		
+				switch($PathInfo['call_parts'][2])
+  				{
+  				case "":
+					include 'acorn/pages/account/two_factor/view_all.php';
+				break;
+		
+				case "add":
+					include 'acorn/pages/account/two_factor/add.php';
+				break;
+				}
+			
+		break;
 	}
 	break;
 

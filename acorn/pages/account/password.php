@@ -70,13 +70,15 @@ if(isset($_POST["SUBMITTED_FORM"]))
 
 include("acorn/global/admin-html-header.php");
 // include html header
+
 ?>
 
 <div class="container">
+<?php 
+define("Panel_Title", "Change Password");
+include("acorn/global/account-html-header.php");
 
-<h1 class="page-header text-center"><i class="fa fa-key"></i> Change Password</h1>
-
-<?php echo $InfoMsg; ?>
+echo $InfoMsg; ?>
 
 <form action="<?php echo constant("BASE_URL"); ?>account/password" method="post" class="form-horizontal">
 <input type="hidden" name="SUBMITTED_FORM" value="TRUE"/>
@@ -123,8 +125,9 @@ include("acorn/global/admin-html-header.php");
 </fieldset>
 </form>
 
-
 <?php
+
+include("acorn/global/account-html-footer.php");
 
 include("acorn/global/admin-html-footer.php");
 // include html footer

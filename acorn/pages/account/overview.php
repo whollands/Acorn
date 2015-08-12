@@ -1,18 +1,5 @@
 <?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
-
-$ActiveUserID = CleanID($_SESSION[""]);
-
-$Query = "SELECT * FROM Users";
-$Result = $GLOBALS["MYSQL_CON"]->query($Query);
-
-if($Result->num_rows != 1)
-{
-	die("Error: There are multiple or no users with the User ID: #" . $ActiveUserID);
-}
-
-$UserRow = $Result->fetch_assoc();
-
 include("acorn/global/admin-html-header.php");
 // include html header
 ?>
@@ -35,8 +22,9 @@ include("acorn/global/admin-html-header.php");
 <div class="list-group">
   <a href="<?php echo constant("BASE_URL"); ?>account/edit" class="list-group-item"><i class="fa fa-pencil"></i> Edit account</a>
   <a href="<?php echo constant("BASE_URL"); ?>account/password" class="list-group-item"><i class="fa fa-lock"></i> Change password</a>
+  <a href="<?php echo constant("BASE_URL"); ?>account/two_factor/" class="list-group-item"><i class="fa fa-mobile"></i> Enable or manage 2-Factor</a>
   <a href="http://gravatar.com/" class="list-group-item"><i class="fa fa-picture-o"></i> Change profile picture</a>
-  <a href="<?php echo constant("BASE_URL"); ?>logout" class="list-group-item"><i class="fa fa-sign-out"></i> Sign Out</a>
+  <a href="<?php echo constant("BASE_URL"); ?>logout" class="list-group-item btn-danger"><i class="fa fa-sign-out"></i> Sign Out</a>
 </div>
 
 </div>
