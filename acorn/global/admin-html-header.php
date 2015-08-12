@@ -63,6 +63,7 @@ $CurrentPage = basename($_SERVER["SCRIPT_NAME"], '');
           	<li><a href="<?php echo constant("BASE_URL"); ?>system/users"><i class="fa fa-users"></i> Users</a></li>
           	<li><a href="<?php echo constant("BASE_URL"); ?>system/backup"><i class="fa fa-hdd-o"></i> Backup & Restore</a></li>
           	<li><a href="<?php echo constant("BASE_URL"); ?>system/email"><i class="fa fa-envelope-o"></i> Email Customisation</a></li>
+          	<li><a href="<?php echo constant("BASE_URL"); ?>system/embed"><i class="fa fa-code"></i> Embed booking widget</a></li>
             <li><a href="<?php echo constant("BASE_URL"); ?>system/settings"><i class="fa fa-gears"></i> System Settings</a></li>
           </ul>
         </li>

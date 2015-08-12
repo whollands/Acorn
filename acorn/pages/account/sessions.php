@@ -1,12 +1,30 @@
 <?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
-include("acorn/global/admin-html-header.php");
-// include html header
+$RemoveID = CleanID($PathInfo['query_vars']['remove_id']);
+$UserID = CleanID($_SESSION["ACORN_USER_ID"]);
+if($RemoveID != null)
+{
+
+// sql to delete a record
+$Query = "DELETE FROM UserSessions WHERE SessionID='$RemoveID' AND UserID='$UserID'";
+
+if ($GLOBALS["MYSQL_CON"]->query($Query) === TRUE) {
+    header("Location: " . constant("BASE_URL") . "account/sessions/success");
+} else {
+    echo "Error deleting record: " . $GLOBALS["MYSQL_CON"]->error;
+}
+
+$GLOBALS["MYSQL_CON"]->close();
+
+}
 
 $UserID = CleanID($_SESSION["ACORN_USER_ID"]);
 
 $Query = "SELECT * FROM UserSessions WHERE UserID='$UserID' ORDER BY LastActive";
 $Result = $GLOBALS["MYSQL_CON"]->query($Query);
+
+include("acorn/global/admin-html-header.php");
+// include html header
 	
 ?>
 
@@ -43,7 +61,7 @@ if($Result->num_rows >= 1)
 	echo "<td><a href=\"http://whatismyipaddress.com/ip/" . $row["LastIP"] . "\" title=\"Lookup this IP Address\" target=\"_blank\">" . $row["LastIP"] . "</a></td>";
 	echo "<td>" . date('jS F Y', strtotime($row["LastActive"])) . "</td>";
 	echo "<td>";
-	echo "<a href=\"" . constant("BASE_URL") . "account/two_factor/remove/" .$row["DeviceID"]."\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-times\"></i> Remove</a>";
+	echo "<a href=\"" . constant("BASE_URL") . "account/sessions?remove_id=" .$row["SessionID"]."\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-times\"></i> Remove</a>";
 	echo "</td>";
 	echo "</tr>";
 	}
