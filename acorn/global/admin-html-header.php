@@ -69,10 +69,8 @@ $CurrentPage = basename($_SERVER["SCRIPT_NAME"], '');
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>&nbsp;<?php echo $_SESSION["ACORN_USER_NAME"]; ?> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<?php echo constant("BASE_URL"); ?>account"><i class="fa fa-globe"></i> Account Overview</a></li>
-            <li><a href="<?php echo constant("BASE_URL"); ?>account/edit"><i class="fa fa-pencil"></i> Edit Account</a></li>
-            <li><a href="<?php echo constant("BASE_URL"); ?>account/password"><i class="fa fa-lock"></i> Change Password</a></li>
-            <li><a href="https://github.com/whollands/Acorn-Appointments/wiki" target="_blank"><i class="fa fa-question-circle"></i> Support</a></li>
+            <li><a href="<?php echo constant("BASE_URL"); ?>account"><i class="fa fa-pencil"></i> Edit Account</a></li>
+            <li><a href="https://github.com/whollands/Acorn/wiki/Getting-Started" target="_blank"><i class="fa fa-question-circle"></i> Support</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="<?php echo constant("BASE_URL"); ?>logout"><i class="fa fa-sign-out"></i> Sign Out</a></li>
           </ul>

@@ -31,16 +31,23 @@ switch($PathInfo['call_parts'][0])
 	
 	switch($PathInfo['call_parts'][1])
   	{
-  		case "":
-			include 'acorn/pages/account/overview.php';
+  		case "": header("Location: " . constant("ROOT_URL") . "account/profile"); exit;
 		break;
 		
 		case "password":
 			include 'acorn/pages/account/password.php';
 		break;
 		
-		case "edit":
-			include 'acorn/pages/account/edit.php';
+		case "profile":
+			include 'acorn/pages/account/profile.php';
+		break;
+		
+		case "sessions":
+			include 'acorn/pages/account/sessions.php';
+		break;
+		
+		case "notifications":
+			include 'acorn/pages/account/notifications.php';
 		break;
 		
 		case "two_factor":
@@ -54,13 +61,16 @@ switch($PathInfo['call_parts'][0])
 				case "add":
 					include 'acorn/pages/account/two_factor/add.php';
 				break;
+				
+				default: include 'acorn/pages/errors/404.php'; break;
 				}
 			
 		break;
+		
+		default: include 'acorn/pages/errors/404.php'; break;
 	}
 	break;
 
-	default:
   	case 'dashboard':
   		
   		Check_Auth_User();

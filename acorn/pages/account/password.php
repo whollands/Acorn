@@ -80,7 +80,7 @@ include("acorn/global/account-html-header.php");
 
 echo $InfoMsg; ?>
 
-<form action="<?php echo constant("BASE_URL"); ?>account/password" method="post" class="form-horizontal">
+<form action="<?php echo constant("BASE_URL"); ?>account/password" method="post">
 <input type="hidden" name="SUBMITTED_FORM" value="TRUE"/>
 
 <fieldset>
@@ -88,38 +88,26 @@ echo $InfoMsg; ?>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="CurrentPassword">Current Password:</label>  
-  <div class="col-md-5">
-  <input name="CurrentPassword" type="password" class="form-control input-md">
+  <label for="CurrentPassword">Current Password:</label>  
+  <input name="CurrentPassword" type="password" class="form-control">
   <span class="help-block" style="color:red;"><?php echo $CurrentPasswordErr; ?></span>  
-  </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="NewPassword">New Password:</label>  
-  <div class="col-md-5">
-  <input name="NewPassword" type="password" class="form-control input-md">
+  <label for="NewPassword">New Password:</label>  
+  <input name="NewPassword" type="password" class="form-control">
   <span class="help-block" style="color:red;"><?php echo $NewPasswordErr; ?></span>  
-  </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="ConfirmNewPassword">Confirm New Password:</label>  
-  <div class="col-md-5">
-  <input name="ConfirmNewPassword" type="password" class="form-control input-md">
+  <label for="ConfirmNewPassword">Confirm New Password:</label>  
+  <input name="ConfirmNewPassword" type="password" class="form-control">
   <span class="help-block" style="color:red;"><?php echo $ConfirmNewPasswordErr; ?></span>  
-  </div>
 </div>
 
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="save"></label>
-  <div class="col-md-4">
-    <input type="submit" class="btn btn-success" value="Change Password"/>
-  </div>
-</div>
+<input type="submit" class="btn btn-success" value="Change Password"/>
 
 
 </fieldset>
