@@ -1,3 +1,6 @@
+# See link below for help on configuring this file
+# http://github.com/whollands/Acorn/wiki/Setting-up-.htaccess
+
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
