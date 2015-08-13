@@ -20,7 +20,7 @@ $AccountPage = $PathInfo['call_parts'][1];
   		</div><!-- /.panel-body -->
 	</div><!-- /.panel -->
 	
-	<a href="#" class="btn btn-block btn-danger">Sign Out &rarr;</a>
+	<a href="<?php echo constant("BASE_URL"); ?>logout" class="btn btn-block btn-danger">Sign Out &rarr;</a>
 
 <br>
 	</div><!-- /.col-md-3 -->

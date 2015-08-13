@@ -57,7 +57,10 @@ if($Result->num_rows >= 1)
 	while($row = $Result->fetch_assoc())
 	{
 	echo "<tr>";
-	echo "<td>" . getOS($row["UserAgent"]) . "</td>";
+	echo "<td>" . getOS($row["UserAgent"]);
+		if($row["Token"] == $_COOKIE["ACORN_SESSION"])
+		{ echo " <span style=\"color:green;\">(this device)</span>"; }
+	echo "</td>";
 	echo "<td><a href=\"http://whatismyipaddress.com/ip/" . $row["LastIP"] . "\" title=\"Lookup this IP Address\" target=\"_blank\">" . $row["LastIP"] . "</a></td>";
 	echo "<td>" . date('jS F Y', strtotime($row["LastActive"])) . "</td>";
 	echo "<td>";

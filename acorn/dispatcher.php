@@ -6,10 +6,9 @@ include("acorn/config/general.php");
 
 include("acorn/global/functions.php");
 
-session_start();
+include("acorn/global/SuperGlobals.php");
 
-$GLOBALS["MYSQL_CON"] = new mysqli(constant("MySQL_Server"), constant("MySQL_User"), constant("MySQL_Pass"), constant("MySQL_DB"));
-// Check connection
+session_start();
 
 if ($GLOBALS["MYSQL_CON"]->connect_error) {
     die("Failed to connect to MySQL");

@@ -1,23 +1,61 @@
 <?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
+function ValidatePreSession()
+{
+	$Token = preg_replace("/[^0-9A-Za-z]/", rand(000,999), $_COOKIE["ACORN_SESSION"]);
+	$UserAgent = $GLOBALS["ClientUserAgent"];
+	// danger! User agent has not been filtered
+	
+	$Query = "SELECT * FROM UserSessions WHERE Token='$Token' AND UserAgent='$UserAgent'";
+	$Result = $GLOBALS["MYSQL_CON"]->query($Query);
+	
+	if($Result->num_rows != 1)
+	{
+		return false;
+	}
+	else
+	{
+		$row = $Result->fetch_assoc();
+		$stmt = $GLOBALS["MYSQL_CON"]->prepare("UPDATE UserSessions SET LastActive=? WHERE SessionID=?");
+		$stmt->bind_param("ss", $GLOBALS["DateTime"], $row["SessionID"]);
+		$stmt->execute();
+		$stmt->close();
+		
+		$UserID = $row["UserID"];
+		
+		$Query = "SELECT UserID, Name FROM Users WHERE UserID='$UserID'";
+		$Result = $GLOBALS["MYSQL_CON"]->query($Query);
+		
+		if($Result->num_rows != 1) die("Error: Multiple users");
+		// kill if multiple users
+		
+		$UserRow = $Result->fetch_assoc();
+	
+		$_SESSION["ACORN_LOGIN"] = true;
+		$_SESSION["ACORN_USER_NAME"] = $UserRow["Name"];
+		$_SESSION["ACORN_USER_ID"] = $UserRow["UserID"];
+		// log them in
+		
+		return true;
+	}
+}
 
 function Check_Auth_User()
 {
 	if($_SESSION["ACORN_LOGIN"] != true)
 	{
-		$PathInfo = ParsePath();
-		$_SESSION["ACORN_AUTH_RETURN"] = $_SERVER['REQUEST_URI'];
-		
-		header("Location: " . constant("BASE_URL") . "login");
-		exit;
+		if(ValidatePreSession() != true)
+		{
+			$PathInfo = ParsePath();
+			$_SESSION["ACORN_AUTH_RETURN"] = $_SERVER['REQUEST_URI'];
+			
+			header("Location: " . constant("BASE_URL") . "login");
+			exit;
+		}
 	}
 }
 
-
-function CleanID($ID) {
-return preg_replace("/[^0-9]/", rand(000,999), $ID);
-}
-
+function CleanID($ID) { return preg_replace("/[^0-9]/", rand(000,999), $ID); }
 
 function CleanData($Data) {
 	$Data = trim($Data);
@@ -50,6 +88,8 @@ function ParsePath() {
 return $path;
 }
 
+function RandomToken() { return md5(uniqid(rand(), true)); }
+// generate random md5 token for salts and login tokens
 
 function getOS($user_agent) { 
 
@@ -88,11 +128,8 @@ function getOS($user_agent) {
         if (preg_match($regex, $user_agent)) {
             $os_platform    =   $value;
         }
-
     }   
-
     return $os_platform;
-
 }
 
 function getBrowser($user_agent) {
@@ -116,9 +153,6 @@ function getBrowser($user_agent) {
         if (preg_match($regex, $user_agent)) {
             $browser    =   $value;
         }
-
     }
-
     return $browser;
-
 }

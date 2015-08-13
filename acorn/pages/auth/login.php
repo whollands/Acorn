@@ -48,21 +48,21 @@ $Email = $_POST["Email"];
 					$_SESSION["ACORN_USER_NAME"] = $Name;
 					$_SESSION["ACORN_USER_ID"] = CleanID($UserID);
                 	
-                	/*
-                    // Password is correct!
-                    // Get the user-agent string of the user.
-                    $user_browser = $_SERVER['HTTP_USER_AGENT'];
-                    // XSS protection as we might print this value
-                    $user_id = preg_replace("/[^0-9]+/", "", $user_id);
-                    $_SESSION['user_id'] = $user_id;
-                    // XSS protection as we might print this value
-                    $username = preg_replace("/[^a-zA-Z0-9_\-]+/", 
-                                                                "", 
-                                                                $username);
-                    $_SESSION['username'] = $username;
-                    $_SESSION['login_string'] = hash('sha512', 
-                              $password . $user_browser);
-                              */
+                	if($_POST["remember-me"] == true)
+                	{		
+                		
+						$SessionToken = RandomToken();
+                		$DateTime = $GLOBALS["DateTime"];
+                		$UserAgent = $GLOBALS["ClientUserAgent"];
+                		$IP = $GLOBALS["ClientIP"];
+                		
+                		$Query = "INSERT INTO UserSessions VALUES (DEFAULT, '$UserID', '$DateTime', '$SessionToken', '$UserAgent', '$IP', '$DateTime')";
+
+						if (!mysqli_query($GLOBALS["MYSQL_CON"], $Query)) { SQLError($Query); }
+                		
+                		setcookie("ACORN_SESSION", $SessionToken, time()+3600 * 24 * 7 * 4);
+                		// expire in 2 months?
+                	}
                     
                     if($_SESSION["ACORN_AUTH_RETURN"] == null)
                     {
@@ -186,7 +186,7 @@ body {
         <input type="password" name="Password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" name="remember-me" value="true" checked> Remember me for 30 days
+            <input type="checkbox" name="remember-me" value="true" checked> Remember me for 40 days and 40 nights
           </label>
         </div>
         <button class="btn btn-lg btn-success btn-block" type="submit">Sign In</button>
