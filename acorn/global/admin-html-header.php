@@ -15,7 +15,7 @@ $CurrentPage = basename($_SERVER["SCRIPT_NAME"], '');
     <link rel="icon" href="<?php echo constant("ROOT_URL"); ?>acorn/images/Acorn_Logo_Icon.png">
     <link rel="apple-touch-icon" href="<?php echo constant("ROOT_URL"); ?>acorn/images/Acorn_App_Icon.png">
 
-    <title>Admin Panel :: Acorn</title>
+    <title>Acorn :: Admin Panel</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo constant("ROOT_URL"); ?>acorn/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@ $CurrentPage = basename($_SERVER["SCRIPT_NAME"], '');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" target="_blank" href="https://github.com/whollands/Acorn-Appointments/" style="color:#6E8F26;font-weight:bold;">Acorn</a>
+      <a class="navbar-brand"href="#" data-toggle="modal" data-target="#aboutAcorn" style="color:#6E8F26;font-weight:bold;"><img src="<?php echo constant("ROOT_URL"); ?>acorn/images/Acorn_Small.png"/></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
