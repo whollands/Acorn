@@ -10,13 +10,15 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 
 <div class="container">
 
-<div class="col-md-11">
-<h1><i class="fa fa-calendar"></i> Calendar</h1>
-</div>
-
-<div class="col-md-1">
-<a href="<?php echo constant("BASE_URL"); ?>dashboard/calendar/add" class="btn btn-success btn-md" style="text-align:right;"><i class="fa fa-plus"></i> New Date</a>
-</div>
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+  	<h4 class="panel-title pull-left" style="padding-top: 7.5px;"><i class="fa fa-calendar"></i> Calendar</h4>
+      <div class="btn-group pull-right">
+        <a href="#" class="btn btn-default btn-sm">Switch to calendar view</a>
+        <a href="#" class="btn btn-success btn-sm btn-disabled"><i class="fa fa-plus"></i> New Event</a>
+      </div>
+  </div>
+  <div class="panel-body">
 
 <?php
 		
@@ -63,7 +65,8 @@ else
 	echo "No dates created yet.";
 }
 ?>
-
+</div>
+</div>
 
 </div>
 

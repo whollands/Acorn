@@ -10,7 +10,16 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 
 <div class="container">
 
-<h1><i class="fa fa-book"></i> Bookings</h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+  	<h4 class="panel-title pull-left" style="padding-top: 7.5px;"><i class="fa fa-book"></i> Bookings</h4>
+      <div class="btn-group pull-right">
+        <a href="#" class="btn btn-default btn-sm">Upcoming</a>
+        <a href="#" class="btn btn-default btn-sm btn-disabled">All Bookings</a>
+      </div>
+  </div>
+  <div class="panel-body">
 
 <?php
 		
@@ -61,9 +70,13 @@ if($Result->num_rows >= 1)
 }
 else
 {
-	echo "No bookings have been made.";
+	echo "No bookings have been made yet.";
 }
 ?>
+
+  </div>
+</div>
+
 
 
 </div>

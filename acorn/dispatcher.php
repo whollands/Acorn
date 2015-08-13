@@ -195,5 +195,7 @@ switch($PathInfo['call_parts'][0])
   	include "acorn/pages/book/book.php";
   break;
   
+  case "": header("Location: " . constant("ROOT_URL") . "book/"); exit; break;
+  
   default: include 'acorn/pages/errors/404.php';
 }

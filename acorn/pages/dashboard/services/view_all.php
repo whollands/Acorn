@@ -11,7 +11,14 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 
 <div class="container">
 
-<h1><i class="fa fa-tags"></i> Services</h1>
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+  	<h4 class="panel-title pull-left" style="padding-top: 7.5px;"><i class="fa fa-tags"></i> Services</h4>
+      <div class="btn-group pull-right">
+        <a href="<?php echo constant("BASE_URL"); ?>dashboard/services/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> New Service</a>
+      </div>
+  </div>
+  <div class="panel-body">
 
 <table class="table table-hover">
 
@@ -48,6 +55,8 @@ else
 ?>
 </tbody>
 </table>
+</div>
+	</div>
 
 </div>
 
