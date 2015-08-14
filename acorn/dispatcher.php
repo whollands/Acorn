@@ -184,6 +184,7 @@ switch($PathInfo['call_parts'][0])
   		
   		case "email": include "acorn/pages/system/email/email.php"; break;
   		case "embed": include "acorn/pages/system/embed/embed.php"; break;
+  		case "settings": include "acorn/pages/system/settings/edit.php"; break;
   		
   		default: include 'acorn/pages/errors/404.php';
   		}

@@ -1,121 +1,51 @@
-<?php
+<?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
-session_start();
+include("acorn/global/admin-html-header.php");
+// include html header
 
-define("ACORN_EXECUTE", true);
-// Acorn is being executed
-
-include("includes/config.php");
-// include master config file
-// which includes functions.php
-
-Check_Auth_User();
-// check user is logged in.
-
-
-
-include("includes/header.php");
-// include master header file
-
-
-$Query = "SELECT ServiceID, Name, MaxBooking FROM Services ORDER BY ServiceID";
-$Result = $GLOBALS["MYSQL_CON"]->query($Query);
 	
 ?>
 
 <div class="container">
 
-<h1>Personal Settings</h1>
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">System</h3>
+  			</div>
+  		<div class="panel-body">
+   
+			<ul class="nav nav-pills nav-stacked">
+			    <li role="presentation"><a href="<?php echo constant("BASE_URL"); ?>system/users"><i class="fa fa-users"></i> Users</a></li>
+  			    <li role="presentation"><a href="<?php echo constant("BASE_URL"); ?>system/email"><i class="fa fa-envelope"></i> Email</a></li>
+  				<li role="presentation"><a href="<?php echo constant("BASE_URL"); ?>system/embed"><i class="fa fa-code"></i> Embed</a></li>
+				<li role="presentation"><a href="<?php echo constant("BASE_URL"); ?>system/backup"><i class="fa fa-hdd-o"></i> Backup & Restore</a></li>
+				<li role="presentation" class="active"><a href="<?php echo constant("BASE_URL"); ?>system/settings"><i class="fa fa-gears"></i> Settings</a></li>
+			</ul>
+  		</div><!-- /.panel-body -->
+	</div><!-- /.panel -->
+	
+	<a href="http://github.com/whollands/Acorn" class="btn btn-block btn-default"><i class="fa fa-github"></i> Github Project Page &rarr;</a>
 
-<div class="col-md-4">
+<br>
+	</div><!-- /.col-md-3 -->
 
-<p>&nbsp;</p>
+	<div class="col-md-9">
 
-<h4><i class="fa fa-bell"></i> Notifications</h4>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Settings</h3>
+  </div><!-- /.panel-heading -->
+  <div class="panel-body">
 
-<div class="checkbox">
-  <label>
-    <input type="checkbox" value="1">
-    Email me when a new booking is made (recommended)
-  </label>
-</div>
+	<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> This has not been implemented in Version 1.0 Alpha</div>
 
-<p>&nbsp;</p>
+</div><!-- /.panel-body -->
+</div><!-- /.panel -->
+</div><!-- /.col-md-9 -->
+</div><!-- /.row -->
+</div><!-- /.container -->
 
-<h4><i class="fa fa-user"></i> Personal Details</h4>
-
-<div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-</div>
-
-<div class="form-group">
-    <label for="exampleInputEmail1">Full Name</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Your Name">
-</div>
-  
-<p>&nbsp;</p>
-
-<h4><i class="fa fa-key"></i> Change Password</h4>
-
-<p>Leave fields below blank to keep current password</p>
-
-<div class="form-group">
-    <label for="exampleInputPassword1">Current Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Current">
-</div>
-
-<div class="form-group">
-    <label for="exampleInputPassword1">New Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="New">
-</div>
-
-<div class="form-group">
-    <label for="exampleInputPassword1">Confirm New Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Repeat-new">
-</div>
-
-<p>&nbsp;</p>
-
-<input type="submit" value="Save Changes &rarr;" class="btn btn-success btn-block"/>
-
-</div><!-- /.col-md-4 -->
-
-<div class="col-md-4"></div>
-<div class="col-md-4"></div>
-
-<?php
-
-/*
-		
-if($Result->num_rows >= 1)
-{
-	while($row = $Result->fetch_assoc())
-	{
-	echo "<tr>";
-	echo "<td>" . $row["ServiceID"] . "</td>";
-	echo "<td>" . $row["Name"] . "</td>";
-	echo "<td>" . $row["MaxBooking"] . "</td>";
-	echo "<td>";
-	echo "<button class=\"btn btn-success btn-xs\"><i class=\"fa fa-pencil\"></i> Edit</button>&nbsp;";
-	echo "<button class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i> Delete</button>";
-	echo "</td>";
-	echo "</tr>";
-	}
-}
-else
-{
-	echo "No services have been created yet.";
-}
-*/
-?>
-
-
-</div>
-
-<?php
-
-include("includes/footer.php");
-// include master footer file
-
-
+<?php include("acorn/global/admin-html-footer.php");
+// include html footer
