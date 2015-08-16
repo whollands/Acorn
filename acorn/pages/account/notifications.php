@@ -17,6 +17,9 @@ define("Panel_Title", "Notifications");
 include("acorn/global/account-html-header.php");
 ?>
 
+<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> This has not been implemented in Version 1.0 Alpha</div>
+
+
 <div class="checkbox">
   <label>
     <input type="checkbox" value="">

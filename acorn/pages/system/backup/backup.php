@@ -39,9 +39,12 @@ include("acorn/global/admin-html-header.php");
   </div><!-- /.panel-heading -->
   <div class="panel-body">
 
+<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> This has not been implemented in Version 1.0 Alpha</div>
+
+
 <p>You can make a full system backup using the button below.</p>
 
-<p><a href="<?php echo constant("BASE_URL"); ?>system/backup/do_backup" class="btn btn-primary btn-md" style="text-align:right;"><i class="fa fa-download"></i> Download Backup</a></p>
+<p><a href="#" class="btn btn-primary btn-md" style="text-align:right;" disabled><i class="fa fa-download"></i> Download Backup</a></p>
 
 <p>To restore a backup, execute the sql file downloaded above in your administrators console or DBMS such as phpMyAdmin.</p>
 

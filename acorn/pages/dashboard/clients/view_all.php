@@ -7,16 +7,13 @@ include("acorn/global/admin-html-header.php");
 $Query = "SELECT ClientID, Name FROM Clients ORDER BY ClientID";
 $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 	
-?>
-
-<div class="container">
-
+?><div class="container">
 
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
   	<h4 class="panel-title pull-left" style="padding-top: 7.5px;"><i class="fa fa-users"></i> Clients</h4>
       <div class="btn-group pull-right">
-        <a href="#" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> New Client</a>
+        <a href="<?php echo constant("BASE_URL"); ?>dashboard/clients/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> New Client</a>
       </div>
   </div>
   <div class="panel-body">
@@ -26,10 +23,10 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 if($Result->num_rows >= 1)
 {
 ?>
-<p>Click on a client's name to view contact card</p>
+<p>Click on a client's name to view their contact card</p>
 
     <form action="<?php echo constant("BASE_URL"); ?>dashboard/clients/search" method="get">
-    <div class="input-group">
+    <div class="input-group col-md-4">
      <input type="text" class="form-control" name="search_term" placeholder="Search clients...">
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit">Submit</button>

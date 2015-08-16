@@ -14,60 +14,44 @@ $UserEmail = $row["Email"];
 $UserNotify = $row["Notify"];
 $UserID = $row["UserID"];
 
-
 include("acorn/global/admin-html-header.php");
 // include html header
 ?>
-
-<div class="container">
-
-<?php
+<div class="container"><?php
 define("Panel_Title", "Profile");
 include("acorn/global/account-html-header.php");
-?>
 
-
-<?php echo $InfoMsg; ?>
+echo $InfoMsg; ?>
 
 <form action="" method="post">
 <input type="hidden" name="SUBMITTED_FORM" value="TRUE"/>
 
-<fieldset>
-
 <img class="img-rounded" src="http://gravatar.com/avatar/<?php echo md5($row["Email"]); ?>?s=100&d=mm"/>
-<a href="http://gravatar.com/" target="_blank" class="btn btn-default btn-xs">Change Avatar</a>
+<a href="http://gravatar.com/emails/" target="_blank" class="btn btn-default btn-xs">Change Avatar</a>
 <p>&nbsp;</p>
-   
-<!-- Text input-->
-<div class="form-group">
-  <label for="UserID">User ID:</label>  
-  <input name="UserID" type="number" value="<?php echo $UserID; ?>" class="form-control" disabled> 
+<div class="row">
+	<div class="form-group col-md-8">
+  		<label for="UserID">User ID:</label>  
+  		<input name="UserID" type="number" value="<?php echo $UserID; ?>" class="form-control" disabled> 
+	</div>
 </div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label for="FullName">Full Name:</label>  
-  <input name="FullName" type="text" value="<?php echo $UserFullName; ?>" class="form-control">
-  <span class="help-block" style="color:red;"><?php echo $UserFullNameErr; ?></span>  
+<div class="row">
+	<div class="form-group col-md-8">
+  		<label for="FullName">Full Name:</label>  
+  		<input name="FullName" type="text" value="<?php echo $UserFullName; ?>" class="form-control">
+  		<span class="help-block" style="color:red;"><?php echo $UserFullNameErr; ?></span>  
+	</div>
 </div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label for="Email">Email Address:</label>  
-  <input name="Email" type="Email" value="<?php echo $UserEmail; ?>" class="form-control">
-  <span class="help-block" style="color:red;"><?php echo $UserEmailErr; ?></span>  
+<div class="row">
+	<div class="form-group col-md-8">
+  		<label for="Email">Email Address:</label>  
+  		<input name="Email" type="Email" value="<?php echo $UserEmail; ?>" class="form-control">
+  		<span class="help-block" style="color:red;"><?php echo $UserEmailErr; ?></span>  
+	</div>
 </div>
-
-
 <input type="submit" class="btn btn-success" value="Update Profile"/>
 
-
-
-</fieldset>
-</form>
-
-
-<?php
+</form><?php
 
 include("acorn/global/account-html-footer.php");
 

@@ -2,14 +2,8 @@
 
 include("acorn/global/admin-html-header.php");
 
-if($_SERVER["QUERY_STRING"] != "history")
-{
-$Query = "SELECT DateID, DateTime FROM Dates WHERE DateTime >= CURRENT_DATE() ORDER BY DateTime";
-}
-else
-{
-$Query = "SELECT DateID, DateTime FROM Dates ORDER BY DateTime DESC";
-}
+
+$Query = "SELECT DateID, DateTime FROM Dates ORDER BY DateTime";
 $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 	
 ?>
@@ -21,8 +15,8 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
   	<h4 class="panel-title pull-left" style="padding-top: 7.5px;"><i class="fa fa-calendar"></i> Calendar</h4>
       <div class="pull-right">
       	<div class="btn-group">
-        <a href="<?php echo constant("BASE_URL"); ?>dashboard/calendar" class="btn btn-default btn-sm"><i class="fa fa-calendar"></i></a>
-        <a href="#" class="btn btn-primary btn-sm active" disabled><i class="fa fa-list"></i></a>
+        <a href="<?php echo constant("BASE_URL"); ?>dashboard/calendar" class="btn btn-primary btn-sm active" disabled><i class="fa fa-calendar"></i></a>
+        <a href="<?php echo constant("BASE_URL"); ?>dashboard/calendar/list" class="btn btn-default btn-sm"><i class="fa fa-list"></i></a>
         </div>
         <a href="#" class="btn btn-success btn-sm btn-disabled"><i class="fa fa-plus"></i> New Event</a>
       </div>
@@ -71,7 +65,7 @@ if($Result->num_rows >= 1)
 }
 else
 {
-	echo "No upcoming dates! <a href=\"".constant("BASE_URL")."dashboard/calendar/list?history\">Show previous dates</a>.";
+	echo "No dates created yet.";
 }
 ?>
 </div>

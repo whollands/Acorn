@@ -86,29 +86,29 @@ echo $InfoMsg; ?>
 <fieldset>
    
 
-<!-- Text input-->
-<div class="form-group">
-  <label for="CurrentPassword">Current Password:</label>  
-  <input name="CurrentPassword" type="password" class="form-control">
-  <span class="help-block" style="color:red;"><?php echo $CurrentPasswordErr; ?></span>  
+<div class="row">
+	<div class="form-group col-md-8">
+	  <label for="CurrentPassword">Current Password:</label>  
+	  <input name="CurrentPassword" type="password" class="form-control">
+	  <span class="help-block" style="color:red;"><?php echo $CurrentPasswordErr; ?></span>  
+	</div>
 </div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label for="NewPassword">New Password:</label>  
-  <input name="NewPassword" type="password" class="form-control">
-  <span class="help-block" style="color:red;"><?php echo $NewPasswordErr; ?></span>  
+<div class="row">
+	<div class="form-group col-md-8">
+	  <label for="NewPassword">New Password:</label>  
+	  <input name="NewPassword" type="password" class="form-control">
+	  <span class="help-block" style="color:red;"><?php echo $NewPasswordErr; ?></span>  
+	</div>
 </div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label for="ConfirmNewPassword">Confirm New Password:</label>  
-  <input name="ConfirmNewPassword" type="password" class="form-control">
-  <span class="help-block" style="color:red;"><?php echo $ConfirmNewPasswordErr; ?></span>  
+<div class="row">
+	<div class="form-group col-md-8">
+	  <label for="ConfirmNewPassword">Confirm New Password:</label>  
+	  <input name="ConfirmNewPassword" type="password" class="form-control">	
+  	  <span class="help-block" style="color:red;"><?php echo $ConfirmNewPasswordErr; ?></span>  
+	</div>
 </div>
-
 <input type="submit" class="btn btn-success" value="Change Password"/>
-
 
 </fieldset>
 </form>

@@ -98,7 +98,8 @@ switch($PathInfo['call_parts'][0])
   			// begin case
   				switch($PathInfo['call_parts'][2])
   				{
-  				case "": include "acorn/pages/dashboard/calendar/view_all.php"; break;
+  				case "": include "acorn/pages/dashboard/calendar/calendar.php"; break;
+  				case "list": include "acorn/pages/dashboard/calendar/view_all.php"; break;
   				case "view": include "acorn/pages/dashboard/calendar/view.php"; break;
   				case "add": include "acorn/pages/dashboard/calendar/add.php"; break;
   				case "delete": include "acorn/pages/dashboard/calendar/confirm_delete.php"; break;

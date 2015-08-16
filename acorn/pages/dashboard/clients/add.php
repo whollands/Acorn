@@ -56,7 +56,7 @@ $AllClear = 0;
 if($AllClear == 4)
 {
 
-$Key = RandomKey(8);
+$Key = RandomToken();
 $EmailMD5 = md5($Email);
 
 $Query = "INSERT INTO Clients VALUES (DEFAULT, '$Name', '$Email', '$EmailMD5', '$Phone', '$Notes', '$Key')";
@@ -72,10 +72,13 @@ if (mysqli_query($GLOBALS["MYSQL_CON"], $Query)) {
 
 include("acorn/global/admin-html-header.php");
 // include html header
-?>
+?><div class="container">
 
-<div class="container">
-
+<div class="panel panel-default">
+  <div class="panel-heading">
+  	<h4 class="panel-title"><i class="fa fa-users"></i> New Client</h4>
+  </div>
+<div class="panel-body">
 <?php
 
 if($PathInfo['call_parts'][3] == "success")
@@ -88,62 +91,47 @@ if($PathInfo['call_parts'][3] == "success")
 }
 ?>
 
-<form action="<?php echo constant("BASE_URL"); ?>dashboard/clients/add" method="post" class="form-horizontal">
-<fieldset>
-
-<!-- Form Name -->
-<legend>Add Client</legend>
+<form action="<?php echo constant("BASE_URL"); ?>dashboard/clients/add" method="post">
 
 <!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="">Client Name:</label>  
-  <div class="col-md-6">
-  	<input name="Name" type="text" value="<?php echo $Name; ?>" placeholder="John Doe" class="form-control input-md" required>
-	<span class="help-block" style="color:red;"><?php echo $NameErr; ?></span> 
-  </div>
-</div>
+<div class="row">
+	<div class="form-group col-md-6">
+	  <label for="Name">Client Name:</label>  
+	  	<input name="Name" type="text" value="<?php echo $Name; ?>" placeholder="John Doe" class="form-control" required>
+		<span class="help-block" style="color:red;"><?php echo $NameErr; ?></span> 
+	</div>
+</div><!-- /.row -->
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="Email">Email Address:</label>  
-  <div class="col-md-6">
- 	<input name="Email" type="email" value="<?php echo $Email; ?>" placeholder="someone@example.com" class="form-control input-md" required>
-    <span class="help-block" style="color:red;"><?php echo $EmailErr; ?></span> 
-  </div>
-</div>
+<div class="row">
+	<div class="form-group col-md-6">
+	  <label for="Email">Email Address:</label>  
+	 	<input name="Email" type="email" value="<?php echo $Email; ?>" placeholder="someone@example.com" class="form-control" required>
+	    <span class="help-block" style="color:red;"><?php echo $EmailErr; ?></span> 
+	</div>
+</div><!-- /.row -->
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="Phone">Phone Number:</label>  
-  <div class="col-md-6">
-  	<input name="Phone" type="phone" value="<?php echo $Phone; ?>" placeholder="+44 1234 567 890" class="form-control input-md" required>
-  	<span class="help-block" style="color:red;"><?php echo $PhoneErr; ?></span>   
-  </div>
-</div>
+<div class="row">
+	<div class="form-group col-md-6">
+	  <label for="Phone">Phone Number:</label>  
+	  	<input name="Phone" type="phone" value="<?php echo $Phone; ?>" placeholder="+44 1234 567 890" class="form-control" required>
+	  	<span class="help-block" style="color:red;"><?php echo $PhoneErr; ?></span>   
+	</div>
+</div><!-- /.row -->
 
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="Notes">Notes:</label>
-  <div class="col-md-6">                     
-    <textarea rows="4" class="form-control" value="<?php echo $Notes; ?>" placeholder="Other names, details etc." name="Notes" required><?php echo $Notes; ?></textarea>
-    <span class="help-block" style="color:red;"><?php echo $NotesErr; ?></span> 
-  </div>
-</div>
+<div class="row">
+	<div class="form-group col-md-6">
+	  <label for="Notes">Notes:</label>                  
+	    <textarea rows="4" class="form-control" value="<?php echo $Notes; ?>" placeholder="Other names, details etc." name="Notes" required><?php echo $Notes; ?></textarea>
+	    <span class="help-block" style="color:red;"><?php echo $NotesErr; ?></span> 
+	</div>
+</div><!-- /.row -->
 
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for=""></label>
-  <div class="col-md-4">
-    <button type="submit" class="btn btn-success">Add Client</button>
-  </div>
-</div>
+<button type="submit" class="btn btn-success">Add Client</button>
 
-</fieldset>
 </form>
 
-</div>
-
-<?php
-
-include("acorn/global/admin-html-footer.php");
+</div><!-- /.panel-body -->
+</div><!-- /.panel -->
+</div><!-- /.container -->
+<?php include("acorn/global/admin-html-footer.php");
 // include html footer

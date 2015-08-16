@@ -37,19 +37,18 @@ include("acorn/global/account-html-header.php");
 
 <p>Places where you are currently logged in to will appear below. Remove any devices you do not recognise.</p>
 <?php
+if($PathInfo['call_parts'][2] == "success") { echo "<div class=\"alert alert-success\" role=\"alert\"><i class=\"fa fa-check\"></i> Session deleted and device has been signed out</div>"; }
 		
 if($Result->num_rows >= 1)
 {
-?>
-  
-<table class="table table-hover">
+?><table class="table table-hover">
 
 <thead>
 	<tr>
-		<td>Device</td>
-		<td>Last IP</td>
-		<td>Last Active</td>
-		<td></td>
+		<th>Device</th>
+		<th>Last IP</th>
+		<th>Last Active</th>
+		<th></th>
 	</tr>
 </thead>
 <tbody>

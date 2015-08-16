@@ -39,7 +39,38 @@ include("acorn/global/admin-html-header.php");
   </div><!-- /.panel-heading -->
   <div class="panel-body">
 
-	<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> This has not been implemented in Version 1.0 Alpha</div>
+<?php
+$EmbedURL = constant("DOMAIN") . "book/";
+
+?>
+<p>You can embed widgets within your site to the Acorn application. Select the HTML element in your website editor or CMS and paste in some code from below:</p>
+<h4>Direct URL:</h4>
+<p><a href="<?php echo $EmbedURL; ?>" target="_blank"><?php echo $EmbedURL; ?></a>
+
+<h4>HTML Button:</h4>
+<div class="row">
+	<div class="form-group col-md-8">
+		<textarea class="form-control" rows="4" onClick="this.setSelectionRange(0, this.value.length)">[<a href="<?php echo $EmbedURL; ?>" target="_blank">Book Now</a>]</textarea>
+	</div>
+</div>
+
+<h4>Fixed-width iFrame:</h4>
+<div class="row">
+	<div class="form-group col-md-8">
+		<textarea class="form-control" rows="4" onClick="this.setSelectionRange(0, this.value.length)"><iframe width="500" height="400" frameborder="0" src="<?php echo $EmbedURL; ?>"></iframe>
+		</textarea>
+	</div>
+</div>
+
+<h4>Responsive Bootstrap iFrame:</h4>
+<div class="row">
+	<div class="form-group col-md-8">
+		<textarea class="form-control" rows="4" onClick="this.setSelectionRange(0, this.value.length)"><div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="<?php echo $EmbedURL; ?>"></iframe></div>
+		</textarea>
+	</div>
+</div>
+
+
 
 </div><!-- /.panel-body -->
 </div><!-- /.panel -->
