@@ -1,17 +1,34 @@
 <?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
-include("acorn/config/database.php");
+$HelpURL = "<p>Please see <a target=\"_blank\" href=\"https://github.com/whollands/Acorn/wiki/Configuration-Files\">https://github.com/whollands/Acorn/wiki/Configuration-Files</a>";
 
+if(!file_exists("acorn/config/database.php"))
+{
+	echo "<h1>Acorn Error</h1><p>Could not find database config file!</p>" . $HelpURL;
+	exit;
+}
+
+if(!file_exists("acorn/config/general.php"))
+{
+	echo "<h1>Acorn Error</h1><p>Could not find general config file!</p>" . $HelpURL;
+	exit;
+}
+
+include("acorn/config/database.php");
 include("acorn/config/general.php");
 
-include("acorn/global/functions.php");
 
+include("acorn/global/functions.php");
 include("acorn/global/SuperGlobals.php");
 
 session_start();
 
 if ($GLOBALS["MYSQL_CON"]->connect_error) {
-    die("Failed to connect to MySQL");
+	$SQL_Error_Output = "<p>Could not connect to database.</p>";
+	$SQL_Error_Output .= "<p>Please ensure a config file is available, see website for more help:</p>";
+	$SQL_Error_Output .= "<a target=\"_blank\" href=\"https://github.com/whollands/Acorn/wiki/Configuration-Files\">https://github.com/whollands/Acorn/wiki/Configuration-Files</a>";
+    include("pages/errors/SQL.php");
+    exit;
 }
 
 

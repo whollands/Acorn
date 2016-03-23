@@ -1,4 +1,4 @@
-# Acorn-Appointments
+# Acorn Bookings
 Light-weight booking system coded in PHP
 
 Check out the Wiki pages for installation guides, how-tos and help!

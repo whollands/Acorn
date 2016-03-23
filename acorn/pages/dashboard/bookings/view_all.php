@@ -14,10 +14,13 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
   	<h4 class="panel-title pull-left" style="padding-top: 7.5px;"><i class="fa fa-book"></i> Bookings</h4>
-      <div class="btn-group pull-right">
-        <a href="#" class="btn btn-default btn-sm">Upcoming</a>
-        <a href="#" class="btn btn-default btn-sm btn-disabled">All Bookings</a>
+    <div class= "pull-right"> 
+      <div class="btn-group">
+        <a href="<?php echo constant("BASE_URL"); ?>dashboard/bookings" class="btn btn-default btn-sm">Upcoming</a>
+        <a href="<?php echo constant("BASE_URL"); ?>dashboard/bookings/upcoming" class="btn btn-default btn-sm btn-disabled">All Bookings</a>
       </div>
+       <a href="<?php echo constant("BASE_URL"); ?>dashboard/bookings/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> New Booking</a>
+    </div>
   </div>
   <div class="panel-body">
 

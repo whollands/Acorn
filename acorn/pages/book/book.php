@@ -33,7 +33,8 @@ exit;
     <!-- Bootstrap core CSS -->
     <link href="<?php echo constant("ROOT_URL"); ?>acorn/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" type="text/css" href="http://cdn.hollands123.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="http://cdn.hollands123.com/font-awesome/4.3.0/css/font-awesome.min.css"/>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

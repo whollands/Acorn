@@ -64,24 +64,19 @@ if(isset($_POST["SUBMITTED_FORM"]))
 if($ServiceDescriptionDone == 1 && $ServiceMaxDone == 1 && $ServiceNameDone == 1)
 {
 
-		$stmt = $GLOBALS["MYSQL_CON"]->prepare("UPDATE Services SET Name=?, MaxBooking=?, Description=?, Enabled=? WHERE ServiceID=?");
-		$stmt->bind_param("sssss", $ServiceName, $ServiceMax, $ServiceDescription, $ServiceEnabled, $ServiceID);
-		$stmt->execute();
-		$stmt->close();
-		
-		$InfoMsg = "<div class=\"alert alert-success\" role=\"alert\"><i class=\"fa fa-check\"></i> Changes saved</div>";
+$Query = "INSERT INTO Services VALUES (DEFAULT, '$ServiceName', '$ServiceMax', '$ServiceDescription', '$ServiceEnabled')";
 
-}
-else
-{
-	$InfoMsg = "<div class=\"alert alert-danger\" role=\"alert\"><i class=\"fa fa-times\"></i> There are errors below</div>";
+if (mysqli_query($GLOBALS["MYSQL_CON"], $Query)) {
+   header("Location: " . constant("BASE_URL") . "dashboard/services/add/success");
+} else {
+	SQLError($Query);
 }
 	
 }
 	
 ?>
 
-<h1 class="page-header">Edit Service</h1>
+<h1 class="page-header">New Service</h1>
 
 <?php echo $InfoMsg; ?>
 
