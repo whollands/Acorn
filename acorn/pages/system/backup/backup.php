@@ -39,8 +39,8 @@ include("acorn/global/admin-html-header.php");
   </div><!-- /.panel-heading -->
   <div class="panel-body">
 
-<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> This has not been implemented in Version 1.0 Alpha</div>
 
+<?php echo InfoMessage("This has not been implimented in Version 2.0 Alpha"); ?>
 
 <p>You can make a full database backup using the button below.</p>
 

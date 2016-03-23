@@ -39,10 +39,7 @@ include("acorn/global/admin-html-header.php");
   </div><!-- /.panel-heading -->
   <div class="panel-body">
 
-<?php
-$EmbedURL = constant("DOMAIN") . constant("BASE_URL") . "book/";
-
-?>
+<?php $EmbedURL = constant("DOMAIN") . constant("BASE_URL") . "book/"; ?>
 <p>You can embed widgets within your site to the Acorn application. Select the HTML element in your website editor or CMS and paste in some code from below:</p>
 <h4>Direct URL:</h4>
 <p><a href="<?php echo $EmbedURL; ?>" target="_blank"><?php echo $EmbedURL; ?></a>

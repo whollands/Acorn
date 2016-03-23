@@ -38,14 +38,13 @@ include("acorn/global/admin-html-header.php");
     <h3 class="panel-title">Settings</h3>
   </div><!-- /.panel-heading -->
   <div class="panel-body">
-
-	<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> This has not been implemented in Version 1.0 Alpha</div>
-
+	
+	<?php echo InfoMessage("This has not been implimented in Version 2.0 Alpha"); ?>
+	
 </div><!-- /.panel-body -->
 </div><!-- /.panel -->
 </div><!-- /.col-md-9 -->
 </div><!-- /.row -->
 </div><!-- /.container -->
-
 <?php include("acorn/global/admin-html-footer.php");
 // include html footer
