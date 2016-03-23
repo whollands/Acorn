@@ -59,11 +59,11 @@ if(isset($_POST["SUBMITTED_FORM"]))
 		$stmt->execute();
 		$stmt->close();
 		
-		$InfoMsg = "<div class=\"alert alert-success\" role=\"alert\"><i class=\"fa fa-check\"></i> Password changed</div>";
+		$InfoMsg = SuccessMessage("Password changed successfully");
 	}
 	else
 	{
-		$InfoMsg = "<div class=\"alert alert-danger\" role=\"alert\"><i class=\"fa fa-times\"></i> There are errors below</div>";
+		$InfoMsg = DangerMessage("There are errors below");
 	}
 
 }

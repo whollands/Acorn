@@ -90,7 +90,7 @@ if($Result->num_rows >= 1)
 	echo "<td>" . $row["Name"] . "</td>";
 	echo "<td>" . constant("CURRENCY_SYMBOL") . $row["Cost"] . "</td>";
 	echo "<td>";
-	echo "<a href=\"".$row["ServiceID"]."/\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Select</a>&nbsp;";
+	echo "<a href=\"" . constant("BASE_URL") . "book/" . $row["ServiceID"]."/\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Select</a>&nbsp;";
 	echo "</td>";
 	echo "</tr>";
 	}

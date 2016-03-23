@@ -20,6 +20,7 @@ include("acorn/config/general.php");
 
 include("acorn/global/functions.php");
 include("acorn/global/SuperGlobals.php");
+include("acorn/global/AlertMessages.php");
 
 session_start();
 

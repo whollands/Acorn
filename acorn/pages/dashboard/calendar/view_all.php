@@ -24,7 +24,7 @@ $Result = $GLOBALS["MYSQL_CON"]->query($Query);
         <a href="<?php echo constant("BASE_URL"); ?>dashboard/calendar" class="btn btn-default btn-sm"><i class="fa fa-calendar"></i></a>
         <a href="#" class="btn btn-primary btn-sm active" disabled><i class="fa fa-list"></i></a>
         </div>
-        <a href="#" class="btn btn-success btn-sm btn-disabled"><i class="fa fa-plus"></i> New Event</a>
+        <a href="<?php echo constant("BASE_URL"); ?>dashboard/calendar/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> New Event</a>
       </div>
   </div>
   <div class="panel-body">

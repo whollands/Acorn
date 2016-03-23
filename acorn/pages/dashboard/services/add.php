@@ -1,161 +1,130 @@
 <?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
-include("acorn/global/admin-html-header.php");
-// include html header
-	
-?>
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-<div class="container">
 
-<?php
-		
-if(isset($_POST["SUBMITTED_FORM"]))
+$AllClear = 0;
+
+  if (empty($_POST["Name"])) {
+    $NameErr = "Service name is required";
+  } else {
+    $Name = CleanData($_POST["Name"]);
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z ]*$/",$Name)) {
+      $NameErr = "Only letters and white space allowed"; 
+    } else {
+    $AllClear = $AllClear + 1;
+    }
+  }
+
+  if (empty($_POST["Email"])) {
+    $EmailErr = "Email is required";
+  } else {
+    $Email = CleanData($_POST["Email"]);
+    // check if e-mail address is well-formed
+    if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+      $EmailErr = "Invalid email format"; 
+    } else {
+    $AllClear = $AllClear + 1;
+    }
+  }
+  
+  if (empty($_POST["Phone"])) {
+    $PhoneErr = "Phone is required";
+  } else {
+    $Phone = CleanData($_POST["Phone"]);
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[0-9+ ]*$/",$Phone)) {
+      $PhoneErr = "Numbers, spaces and + only"; 
+ 	} else {
+    $AllClear = $AllClear + 1;
+    }
+  }
+  
+  if (empty($_POST["Notes"])) {
+    $Notes = "";
+    $AllClear = $AllClear + 1;
+  } else {
+    $Notes = CleanData($_POST["Notes"]);
+    if(strlen($Notes) > 350) {
+    $NotesErr = "Maximum of 350 Characters";
+    } else {
+    $AllClear = $AllClear + 1;
+    }
+  }
+  
+if($AllClear == 4)
 {
 
-	switch($_POST["ServiceEnabled"])
-	{
-	default: $ServiceEnabled = 0; break;
-	case 1: $ServiceEnabled = 1; break;
-	}
-	
-	if(empty($_POST["ServiceName"]))
-		{ 
-			$ServiceNameErr = "Service name is required";
-		}
-		else
-		{
-			$ServiceName = CleanData($_POST["ServiceName"]);
-			
-		if(!preg_match("/^[a-zA-Z0-9+-. ]*$/",$ServiceName))
-			{
-				$ServiceNameErr = "Letters and spaces only";
-			}
-			else 
-			{ 
-			$ServiceNameDone = 1;
-			}
-		}
-		// end name validation
-		
+$Key = RandomToken();
+$EmailMD5 = md5($Email);
 
-		$ServiceMax = CleanData($_POST["ServiceMax"]);
-			
-		if(!preg_match("/^[0-9]*$/",$ServiceMax))
-			{
-				$ServiceMaxErr = "Numbers only";
-			}
-			else 
-			{ 
-			$ServiceMaxDone = 1;
-			}
-		// end name validation
-
-	if(strlen($_POST["ServiceDescription"]) > 200)
-	{
-		$ServiceDescription = CleanData($_POST["ServiceDescription"]);
-		$ServiceDescriptionErr = "Maximum of 200 characters";
-	}
-	else
-	{
-		$ServiceDescription = strip_tags(CleanData($_POST["ServiceDescription"]));
-		$ServiceDescriptionDone = 1;
-	}
-	
-if($ServiceDescriptionDone == 1 && $ServiceMaxDone == 1 && $ServiceNameDone == 1)
-{
-
-$Query = "INSERT INTO Services VALUES (DEFAULT, '$ServiceName', '$ServiceMax', '$ServiceDescription', '$ServiceEnabled')";
+$Query = "INSERT INTOafsd Clients VALUES (DEFAULT, '$Name', '$Email', '$EmailMD5', '$Phone', '$Notes', '$Key')";
 
 if (mysqli_query($GLOBALS["MYSQL_CON"], $Query)) {
-   header("Location: " . constant("BASE_URL") . "dashboard/services/add/success");
+   
+   $InfoMsg = SuccessMessage("Service added successfully!");
+   
 } else {
-	SQLError($Query);
+	$InfoMsg = WarningMessage("An SQL Database error occurred");
 }
-	
 }
-	
-?>
+  
+}
 
-<h1 class="page-header">New Service</h1>
+include("acorn/global/admin-html-header.php");
+// include html header
+?><div class="container">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+  	<h4 class="panel-title"><i class="fa fa-tags"></i> New Service</h4>
+  </div>
+<div class="panel-body">
 
 <?php echo $InfoMsg; ?>
 
-<form action="" method="post" class="form-horizontal">
-<input type="hidden" name="SUBMITTED_FORM" value="TRUE"/>
-
-<fieldset>
-   
+<form action="<?php echo constant("BASE_URL"); ?>dashboard/clients/add" method="post">
 
 <!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="ServiceName">Service Name:</label>  
-  <div class="col-md-5">
-  <input name="ServiceName" type="text" value="<?php echo $ServiceName; ?>" class="form-control input-md">
-  <span class="help-block" style="color:red;"><?php echo $ServiceNameErr; ?></span>  
-  </div>
-</div>
-
-<!-- Number input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="name">Maximum number of bookings:</label>  
-  <div class="col-md-5">
-  <input name="ServiceMax" type="number" value="<?php echo $ServiceMax; ?>" class="form-control input-md">
-  <span class="help-block" style="color:red;"><?php echo $ServiceMaxErr; ?></span>  
-  </div>
-</div>
-
-<!-- Number input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="name">Cost Per Booking:</label>  
-  <div class="col-md-5">
- 	<div class="input-group">
-      <div class="input-group-addon"><?php echo constant("CURRENCY_SYMBOL"); ?></div>
-      <input type="number" class="form-control" id="exampleInputAmount" placeholder="5.00">
+<div class="row">
+	<div class="form-group col-md-6">
+	  <label for="Name">Client Name:</label>  
+	  	<input name="Name" type="text" value="<?php echo $Name; ?>" placeholder="John Doe" class="form-control" required>
+		<span class="help-block" style="color:red;"><?php echo $NameErr; ?></span> 
 	</div>
-  </div>
-</div>
+</div><!-- /.row -->
 
-  
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textarea">Description:</label>
-  <div class="col-md-5">                     
-    <textarea class="form-control" name="ServiceDescription" rows="4"><?php echo $ServiceDescription; ?></textarea>
-    <span class="help-block" style="color:red;"><?php echo $ServiceDescriptionErr; ?></span>
-  </div>
-</div>
+<div class="row">
+	<div class="form-group col-md-6">
+	  <label for="Email">Email Address:</label>  
+	 	<input name="Email" type="email" value="<?php echo $Email; ?>" placeholder="someone@example.com" class="form-control" required>
+	    <span class="help-block" style="color:red;"><?php echo $EmailErr; ?></span> 
+	</div>
+</div><!-- /.row -->
 
-<!-- Multiple Checkboxes (inline) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="ServiceEnabled"></label>
-  <div class="col-md-4">
-    <label class="checkbox-inline" for="ServiceEnabled">
-      <input type="checkbox" name="ServiceEnabled" value="1"<?php if($ServiceEnabled == 1) { echo " checked"; } ?>>
-      Enable clients to book this service
-    </label>
-  </div>
-</div>
+<div class="row">
+	<div class="form-group col-md-6">
+	  <label for="Phone">Phone Number:</label>  
+	  	<input name="Phone" type="phone" value="<?php echo $Phone; ?>" placeholder="+44 1234 567 890" class="form-control" required>
+	  	<span class="help-block" style="color:red;"><?php echo $PhoneErr; ?></span>   
+	</div>
+</div><!-- /.row -->
 
+<div class="row">
+	<div class="form-group col-md-6">
+	  <label for="Notes">Notes:</label>                  
+	    <textarea rows="4" class="form-control" value="<?php echo $Notes; ?>" placeholder="Other names, details etc." name="Notes" required><?php echo $Notes; ?></textarea>
+	    <span class="help-block" style="color:red;"><?php echo $NotesErr; ?></span> 
+	</div>
+</div><!-- /.row -->
 
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="save"></label>
-  <div class="col-md-4">
-    <input type="submit" class="btn btn-success" value="Update Service"/>
-  </div>
-</div>
+<button type="submit" class="btn btn-success">Add Client</button>
 
-
-</fieldset>
 </form>
 
-
-</div>
-
-<?php
-
-include("acorn/global/admin-html-footer.php");
+</div><!-- /.panel-body -->
+</div><!-- /.panel -->
+</div><!-- /.container -->
+<?php include("acorn/global/admin-html-footer.php");
 // include html footer
-
-
-
