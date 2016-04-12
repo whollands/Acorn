@@ -2,20 +2,13 @@
 
 $HelpURL = "<p>Please see <a target=\"_blank\" href=\"https://github.com/whollands/Acorn/wiki/Configuration-Files\">https://github.com/whollands/Acorn/wiki/Configuration-Files</a>";
 
-if(!file_exists("acorn/config/database.php"))
+if(!file_exists("acorn-config.php"))
 {
-	echo "<h1>Acorn Error</h1><p>Could not find database config file!</p>" . $HelpURL;
+	echo "<h1>Acorn Error</h1><p>Could not find configuration file!</p>" . $HelpURL;
 	exit;
 }
 
-if(!file_exists("acorn/config/general.php"))
-{
-	echo "<h1>Acorn Error</h1><p>Could not find general config file!</p>" . $HelpURL;
-	exit;
-}
-
-include("acorn/config/database.php");
-include("acorn/config/general.php");
+include("acorn-config.php");
 
 
 include("acorn/global/functions.php");
