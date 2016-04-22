@@ -1,11 +1,18 @@
 <?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
+// FOR HELP WITH CONFIGURATION SEE
+// https://github.com/whollands/Acorn/wiki/Configuration-Files
+
 date_default_timezone_set("UTC");
 // set your timezone, see list of supported timezones:
 // http://php.net/manual/en/timezones.php
 
 define("CURRENCY_SYMBOL", "£");
 // define your currency symbol
+
+/*-------------------------------/*
+          USER ACCOUNTS
+/*------------------------------*/
 
 define("MASTER_SALT", "917878fdc64c0ad8eb0a47b3ba118dc8");
 // generate a random md5 string unique for hashing your passwords
