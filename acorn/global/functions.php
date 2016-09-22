@@ -1,5 +1,10 @@
 <?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
+
+/* ----------------------------------
+    Login Functions
+---------------------------------- */
+
 function ValidatePreSession()
 {
 	$Token = preg_replace("/[^0-9A-Za-z]/", rand(000,999), $_COOKIE["ACORN_SESSION"]);
@@ -54,6 +59,10 @@ function Check_Auth_User()
 		}
 	}
 }
+
+/* ----------------------------------
+    Safe Data Input
+---------------------------------- */
 
 function CleanID($ID) { return preg_replace("/[^0-9]/", rand(000,999), $ID); }
 
@@ -155,4 +164,10 @@ function getBrowser($user_agent) {
         }
     }
     return $browser;
+}
+
+
+function HideEmail($email)
+{
+    return preg_replace("/(?<=.).(?=.*@)/u","*", $email);
 }

@@ -1,7 +1,9 @@
 <?php
 
-// bootstrap error and info messages
-// configured with functions
+/* ----------------------------------
+    Pre-Configured Bootstrap
+    Alert Messages
+---------------------------------- */
 
 function SuccessMessage($message)
 {

@@ -1,10 +1,9 @@
 <?php defined("ACORN_EXECUTE") or die("Access Denied.");
 
-$HelpURL = "<p>Please see <a target=\"_blank\" href=\"https://github.com/whollands/Acorn/wiki/Configuration-Files\">https://github.com/whollands/Acorn/wiki/Configuration-Files</a>";
-
 if(!file_exists("acorn-config.php"))
 {
-	echo "<h1>Acorn Error</h1><p>Could not find configuration file!</p>" . $HelpURL;
+	echo "<h1>Acorn Error</h1><p>Could not find configuration file!</p>";
+  echo "<p>Please see <a target=\"_blank\" href=\"https://github.com/whollands/Acorn/wiki/Configuration-Files\">https://github.com/whollands/Acorn/wiki/Configuration-Files</a>";
 	exit;
 }
 

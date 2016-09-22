@@ -183,7 +183,7 @@ function isValidMd5($md5 ='')
 			echo "<h2>" . $row["Name"] . "</h2>";
 		?>
 		
-		<p>We have your email address <?php echo preg_replace("/(?<=.).(?=.*@)/u","*",$row["Email"]); ?> on our database, if this is indeed you there is no need to re-enter your details.</p>
+		<p>We have your email address <?php echo HideEmail($row["Email"]); ?> on our database, if this is indeed you there is no need to re-enter your details.</p>
 		<p>Are you <?php echo $row["Name"]; ?>?</p>
 		
 		<a href="review" class="btn btn-success">Yes, Review Booking</a>
@@ -233,10 +233,7 @@ function isValidMd5($md5 ='')
   			<input type="submit" value="Make booking &rarr;" class="btn btn-success btn-block"/>
   			
   		</form>
-  			
-  			<p><a href="index.php">Admin Panel &rarr;</a></p>
-        	
-        
+
         </div>
         <div class="col-md-4"></div>
       </div>
